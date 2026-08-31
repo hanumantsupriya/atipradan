@@ -2,33 +2,170 @@
 <html lang="mr">
 <head>
 <meta charset="UTF-8">
-<title>पुणे महानगरपालिका - बहु-वेतन आयोग स्वयंचलित जास्त प्रदान वेतन वसुली विवरणपत्र</title>
+<title>पुणे महानगरपालिका - जास्त प्रदान वेतन वसुली विवरणपत्र (Black & White)</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <style>
-body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f4f7f6; padding: 15px; }
-.container { max-width: 1650px; margin: auto; background: white; padding: 25px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-h2 { text-align: center; color: #c62828; border-bottom: 2px solid #c62828; padding-bottom: 10px; margin-bottom: 20px; font-size: 22px; }
-.entry-box { background: #ffebee; padding: 20px; border-radius: 8px; border: 1px solid #ef5350; margin-bottom: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; }
-label { font-weight: bold; font-size: 13px; display: block; margin-bottom: 5px; color: #333; white-space: nowrap; }
-input, select { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-size: 13px; background-color: #fff; height: 38px; }
-.btn-rec-calc { background-color: #c62828; color: white; padding: 0 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; font-weight: bold; height: 38px; white-space: nowrap; }
-.btn-excel { background-color: #2e7d32; color: white; padding: 0 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; font-weight: bold; height: 38px; white-space: nowrap; }
-.btn-clear { background-color: #555555; color: white; padding: 0 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; font-weight: bold; height: 38px; white-space: nowrap; }
-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 10px; }
-th, td { border: 1px solid #ddd; padding: 5px 3px; text-align: center; }
-.recovery-table-header { background-color: #c62828; color: white; font-weight: bold; font-size: 11px; }
-.sub-header { background-color: #d32f2f; color: white; font-weight: bold; }
-tr:nth-child(even) { background-color: #fcfcfc; }
-.recovery-total-row { background-color: #8B1E1E !important; font-weight: bold; font-size: 11px; color: #b71c1c; }
-.result-card { background: #8B1E1E; padding: 15px; border: 2px dashed #ef5350; border-radius: 8px; margin-top: 15px; margin-bottom: 15px; font-size: 13px; line-height: 1.5; color: #b71c1c; }
-.days-edit-input { width: 45px !important; height: 26px !important; padding: 2px !important; font-size: 11px !important; text-align: center !important; font-weight: bold !important; border: 1px solid #ef5350 !important; background: #fff8e1 !important; }
-.footer-msg { margin-top: 30px; padding: 15px; background-color: #8B1E1E; border-radius: 8px; text-align: center; font-size: 13px; color: #333; border: 1px solid #ccc; }
+body { 
+    font-family: 'Segoe UI', Arial, sans-serif; 
+    background-color: #f0f0f0; 
+    color: #000000;
+    padding: 15px; 
+}
+.container { 
+    max-width: 1650px; 
+    margin: auto; 
+    background: #ffffff; 
+    padding: 25px; 
+    border-radius: 4px; 
+    border: 1px solid #000000;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+}
+h2 { 
+    text-align: center; 
+    color: #000000; 
+    border-bottom: 2px solid #000000; 
+    padding-bottom: 10px; 
+    margin-bottom: 20px; 
+    font-size: 22px; 
+}
+.entry-box { 
+    background: #fdfdfd; 
+    padding: 20px; 
+    border-radius: 4px; 
+    border: 1px solid #333333; 
+    margin-bottom: 20px; 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); 
+    gap: 15px; 
+}
+label { 
+    font-weight: bold; 
+    font-size: 13px; 
+    display: block; 
+    margin-bottom: 5px; 
+    color: #000000; 
+    white-space: nowrap; 
+}
+input, select { 
+    width: 100%; 
+    padding: 8px; 
+    border: 1px solid #000000; 
+    border-radius: 3px; 
+    box-sizing: border-box; 
+    font-size: 13px; 
+    background-color: #ffffff; 
+    color: #000000;
+    height: 38px; 
+}
+input:focus, select:focus {
+    outline: 2px solid #000000;
+}
+.btn-rec-calc { 
+    background-color: #000000; 
+    color: #ffffff; 
+    padding: 0 20px; 
+    border: 1px solid #000000; 
+    border-radius: 3px; 
+    cursor: pointer; 
+    font-size: 14px; 
+    font-weight: bold; 
+    height: 38px; 
+    white-space: nowrap; 
+}
+.btn-excel { 
+    background-color: #444444; 
+    color: #ffffff; 
+    padding: 0 20px; 
+    border: 1px solid #444444; 
+    border-radius: 3px; 
+    cursor: pointer; 
+    font-size: 14px; 
+    font-weight: bold; 
+    height: 38px; 
+    white-space: nowrap; 
+}
+.btn-clear { 
+    background-color: #ffffff; 
+    color: #000000; 
+    padding: 0 20px; 
+    border: 1px solid #000000; 
+    border-radius: 3px; 
+    cursor: pointer; 
+    font-size: 14px; 
+    font-weight: bold; 
+    height: 38px; 
+    white-space: nowrap; 
+}
+table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    margin-top: 15px; 
+    font-size: 10px; 
+    color: #000000;
+}
+th, td { 
+    border: 1px solid #000000; 
+    padding: 5px 3px; 
+    text-align: center; 
+}
+.recovery-table-header th { 
+    background-color: #000000 !important; 
+    color: #ffffff !important; 
+    font-weight: bold; 
+    font-size: 11px; 
+}
+.sub-header th { 
+    background-color: #333333 !important; 
+    color: #ffffff !important; 
+    font-weight: bold; 
+}
+tr:nth-child(even) { 
+    background-color: #f7f7f7; 
+}
+.recovery-total-row td { 
+    background-color: #d6d6d6 !important; 
+    font-weight: bold; 
+    font-size: 11px; 
+    color: #000000 !important; 
+}
+.result-card { 
+    background: #ffffff; 
+    padding: 15px; 
+    border: 1px solid #000000; 
+    border-radius: 4px; 
+    margin-top: 15px; 
+    margin-bottom: 15px; 
+    font-size: 13px; 
+    line-height: 1.5; 
+    color: #000000; 
+}
+.days-edit-input { 
+    width: 45px !important; 
+    height: 26px !important; 
+    padding: 2px !important; 
+    font-size: 11px !important; 
+    text-align: center !important; 
+    font-weight: bold !important; 
+    border: 1px solid #000000 !important; 
+    background: #ffffff !important; 
+    color: #000000 !important;
+}
+.footer-msg { 
+    margin-top: 30px; 
+    padding: 15px; 
+    background-color: #ffffff; 
+    border-radius: 4px; 
+    text-align: center; 
+    font-size: 13px; 
+    color: #000000; 
+    border: 1px solid #000000; 
+}
 </style>
 </head>
 <body>
 
 <div class="container">
-<h2>पुणे महानगरपालिका - बहु-वेतन आयोग स्वयंचलित जास्त प्रदान वेतन वसुली विवरणपत्र</h2>
+<h2>पुणे महानगरपालिका - जास्त प्रदान वेतन वसुली विवरणपत्र</h2>
 
 <div class="entry-box">
 <div><label>वसुली सुरुवातीचा दिनांक (From):</label><input type="text" id="rec_start_date" placeholder="DD/MM/YYYY"></div>
@@ -47,7 +184,7 @@ tr:nth-child(even) { background-color: #fcfcfc; }
 
 <div class="result-card" id="recoveryMsg" style="display: none;"></div>
 
-<h3>📋 महिनावार जास्त प्रदान वेतन वसुली ताळेबंद तक्ता (Present Days Live Edit सह)</h3>
+<h3 style="color:#000000;">📋 महिनावार जास्त प्रदान वेतन वसुली ताळेबंद तक्ता (Present Days Live Edit सह)</h3>
 <div style="overflow-x: auto;">
 <table id="recoveryStatementTable">
 <thead>
@@ -64,7 +201,7 @@ tr:nth-child(even) { background-color: #fcfcfc; }
 </tr>
 </thead>
 <tbody>
-<tr><td colspan="29" style="color: #666; text-align: center; padding: 20px;">अजून कोणतीही वसुली गणना केलेली नाही. माहिती भरून बटणावर क्लिक करा.</td></tr>
+<tr><td colspan="29" style="color: #000000; text-align: center; padding: 20px;">अजून कोणतीही वसुली गणना केलेली नाही. माहिती भरून बटणावर क्लिक करा.</td></tr>
 </tbody>
 </table>
 </div>
@@ -91,11 +228,9 @@ window.onload = function() {
 
 function parseDMY(str) { if(!str) return null; let parts = str.split("/"); return new Date(parts[2], parts[1] - 1, parts[0]); }
 
-// ऐतिहासिक महागाई भत्ता मॅपिंग (१९८६ ते २०२६ संपूर्ण अधिकृत दर)
 function getHistoricalDARate(dateObj) {
     let y = dateObj.getFullYear(); let m = dateObj.getMonth() + 1;
     
-    // ४ था वेतन आयोग (१९८६ ते १९९५)
     if (y < 1996) {
         if (y === 1986) return m >= 7 ? 0.04 : 0.00;
         if (y === 1987) return m >= 7 ? 0.13 : 0.08;
@@ -108,7 +243,6 @@ function getHistoricalDARate(dateObj) {
         if (y === 1994) return m >= 7 ? 1.14 : 1.04;
         if (y === 1995) return m >= 7 ? 1.36 : 1.25;
     }
-    // ५ वा वेतन आयोग (१९९६ ते २००५)
     if (y >= 1996 && y <= 2005) {
         if (y === 1996) return m >= 7 ? 0.04 : 0.00;
         if (y === 1997) return m >= 7 ? 0.13 : 0.08;
@@ -118,10 +252,9 @@ function getHistoricalDARate(dateObj) {
         if (y === 2001) return m >= 7 ? 0.45 : 0.43;
         if (y === 2002) return m >= 7 ? 0.52 : 0.49;
         if (y === 2003) return m >= 7 ? 0.59 : 0.55;
-        if (y === 2004) return m >= 7 ? 0.14 : 0.11; // १ एप्रिल २००४ नंतर ५०% DP विलीन झाल्यावर DA कमी झाला
+        if (y === 2004) return m >= 7 ? 0.14 : 0.11;
         if (y === 2005) return m >= 7 ? 0.21 : 0.17;
     }
-    // ६ वा वेतन आयोग (२००६ ते २०१५)
     if (y >= 2006 && y <= 2015) {
         if (y === 2006) return m >= 7 ? 0.02 : 0.00;
         if (y === 2007) return m >= 7 ? 0.09 : 0.06;
@@ -134,7 +267,6 @@ function getHistoricalDARate(dateObj) {
         if (y === 2014) return m >= 7 ? 1.07 : 1.00;
         if (y === 2015) return m >= 7 ? 1.19 : 1.13;
     }
-    // ७ वा वेतन आयोग (२०१६ ते २०२६)
     if (y >= 2016) {
         if (y <= 2019) return m >= 7 ? 0.17 : 0.12;
         if (y === 2020) return 0.17;
@@ -150,8 +282,8 @@ function getHistoricalDARate(dateObj) {
 
 function getHistoricalHRARate(dateObj) {
     let y = dateObj.getFullYear();
-    if (y < 2006) return 0.15; // ४ था व ५ वा आयोग
-    if (y >= 2006 && y <= 2015) return 0.20; // ६ वा आयोग
+    if (y < 2006) return 0.15;
+    if (y >= 2006 && y <= 2015) return 0.20;
     if (y >= 2016) {
         if (getHistoricalDARate(dateObj) >= 0.50) return 0.30;
         if (y >= 2021) return 0.27;
@@ -160,7 +292,6 @@ function getHistoricalHRARate(dateObj) {
     return 0.24;
 }
 
-// तारखेनुसार वेतन आयोग निश्चित करणे
 function getCommissionName(dateObj) {
     let y = dateObj.getFullYear();
     if (y < 1996) return "४ था";
@@ -169,7 +300,6 @@ function getCommissionName(dateObj) {
     return "७ वा";
 }
 
-// 🌟 बहु-वेतन आयोग स्वयंचलित वसुली मुख्य गणना 🌟
 function calculateAutomaticMultiCommissionRecovery() {
     let drawnBasicStart = parseInt(document.getElementById('rec_drawn_basic').value) || 0;
     let dueBasicStart = parseInt(document.getElementById('rec_due_basic').value) || 0;
@@ -202,27 +332,23 @@ function calculateAutomaticMultiCommissionRecovery() {
         let mLabel = currentCursor.toLocaleString('en-US', { month: 'short', year: '2-digit' }).toUpperCase();
         let commName = getCommissionName(currentCursor);
 
-        // जेव्हा वेतन आयोग बदलतो (उदा. २००६ किंवा २०१६) तेव्हा गुणाकार गुणोत्तर लागू करणे
         if (commName !== prevComm) {
             if (commName === "६ वा") {
-                // ५ व्यातून ६ व्यात जाताना Basic x 1.86
                 activeDrawnBasic = Math.round(activeDrawnBasic * 1.86 / 10) * 10;
                 activeDueBasic = Math.round(activeDueBasic * 1.86 / 10) * 10;
             } else if (commName === "७ वा") {
-                // ६ व्यातून ७ व्यात जाताना (Basic + GP) x 2.57
                 activeDrawnBasic = Math.round((activeDrawnBasic + drawnGp) * 2.57 / 100) * 100;
                 activeDueBasic = Math.round((activeDueBasic + dueGp) * 2.57 / 100) * 100;
             }
             prevComm = commName;
         }
 
-        // वार्षिक वेतनवाढ (दरवर्षी १ जुलैला ३% वाढ)
         if (currentCursor.getTime() > dStart.getTime() && curMonth === 7) {
             activeDrawnBasic = Math.round(activeDrawnBasic * 1.03 / 10) * 10;
             activeDueBasic = Math.round(activeDueBasic * 1.03 / 10) * 10;
         }
 
-        let presentDays = daysInMonth; // डीफॉल्ट पूर्ण महिना हजर
+        let presentDays = daysInMonth;
         let daRate = getHistoricalDARate(currentCursor); 
         let hraRate = getHistoricalHRARate(currentCursor);
 
@@ -242,7 +368,6 @@ function calculateAutomaticMultiCommissionRecovery() {
     renderRecoveryTable();
 }
 
-// विशिष्ट महिन्याचे घटक मोजणे
 function computeRowValues(item) {
     let ratio = item.presentDays / item.actualDays;
     let drBasic = Math.round(item.activeDrawnBasic * ratio);
@@ -250,7 +375,6 @@ function computeRowValues(item) {
     let drGp = Math.round(item.drawnGp * ratio);
     let duGp = Math.round(item.dueGp * ratio);
 
-    // ५ व्या वेतन आयोगात ०१/०४/२००४ पासून ५०% DP (महागाई वेतन)
     let drDp = 0, duDp = 0;
     if (item.commName === "५ वा" && (item.curYear > 2004 || (item.curYear === 2004 && item.curMonth >= 4))) {
         drDp = Math.round(drBasic * 0.50);
@@ -265,7 +389,6 @@ function computeRowValues(item) {
     let drHra = Math.round(drEmol * item.hraRate);
     let duHra = Math.round(duEmol * item.hraRate);
 
-    // CPS व CHS कपात
     let drCps = 0, duCps = 0, drChs = 0, duChs = 0;
     if (item.commName === "७ वा") {
         drCps = Math.round((drBasic + drDa) * 0.10);
@@ -295,7 +418,6 @@ function computeRowValues(item) {
     item.recCps = recCps; item.recChs = recChs; item.netRecovery = netRecovery;
 }
 
-// 🌟 Present Days लाइव्ह एडिट झाल्यावर पुन्हा मोजणे 🌟
 function onPresentDaysChange(idx, val) {
     let pDays = parseInt(val);
     if (isNaN(pDays) || pDays < 0) pDays = 0;
@@ -310,7 +432,7 @@ function onPresentDaysChange(idx, val) {
 function renderRecoveryTable() {
     let tbody = document.querySelector("#recoveryStatementTable tbody"); tbody.innerHTML = "";
     if (calculatedRecovery.length === 0) { 
-        tbody.innerHTML = `<tr><td colspan="29" style="color: #666; text-align: center; padding: 20px;">अजून कोणतीही वसुली गणना केलेली नाही.</td></tr>`; return; 
+        tbody.innerHTML = `<tr><td colspan="29" style="color: #000000; text-align: center; padding: 20px;">अजून कोणतीही वसुली गणना केलेली नाही.</td></tr>`; return; 
     }
 
     let tDuB=0, tDuDp=0, tDuGp=0, tDuD=0, tDuH=0, tDuC=0, tDuChs=0, tDuT=0; 
@@ -321,22 +443,22 @@ function renderRecoveryTable() {
         let row = tbody.insertRow();
         row.innerHTML = `
             <td><strong>${item.month}</strong></td>
-            <td><span style="font-weight:bold; color:#1a73e8;">${item.commName}</span></td>
+            <td><strong>${item.commName}</strong></td>
             <td>${item.actualDays}</td>
             <td><input type="number" class="days-edit-input" min="0" max="${item.actualDays}" value="${item.presentDays}" onchange="onPresentDaysChange(${index}, this.value)"></td>
             <td>${(item.daRate * 100).toFixed(0)}%</td>
             
-            <td>${item.duBasic}</td><td>${item.duDp}</td><td>${item.duGp}</td><td>${item.duDa}</td><td>${item.duHra}</td><td>${item.duCps}</td><td>${item.duChs}</td><td style="background:#e8f5e9;">${item.duTotal}</td>
-            <td>${item.drBasic}</td><td>${item.drDp}</td><td>${item.drGp}</td><td>${item.drDa}</td><td>${item.drHra}</td><td>${item.drCps}</td><td>${item.drChs}</td><td style="background:#ffebee;">${item.drTotal}</td>
+            <td>${item.duBasic}</td><td>${item.duDp}</td><td>${item.duGp}</td><td>${item.duDa}</td><td>${item.duHra}</td><td>${item.duCps}</td><td>${item.duChs}</td><td style="background:#f0f0f0;">${item.duTotal}</td>
+            <td>${item.drBasic}</td><td>${item.drDp}</td><td>${item.drGp}</td><td>${item.drDa}</td><td>${item.drHra}</td><td>${item.drCps}</td><td>${item.drChs}</td><td style="background:#f0f0f0;">${item.drTotal}</td>
             
-            <td style="color:#b71c1c; font-weight:bold;">${item.recBasic}</td>
-            <td style="color:#b71c1c;">${item.recDp}</td>
-            <td style="color:#b71c1c;">${item.recGp}</td>
-            <td style="color:#b71c1c;">${item.recDa}</td>
-            <td style="color:#b71c1c;">${item.recHra}</td>
-            <td style="color:green;">${item.recCps}</td>
-            <td style="color:green;">${item.recChs}</td>
-            <td style="font-weight:bold; background:#ffcdd2; color:#b71c1c;">${item.netRecovery}</td>
+            <td><strong>${item.recBasic}</strong></td>
+            <td>${item.recDp}</td>
+            <td>${item.recGp}</td>
+            <td>${item.recDa}</td>
+            <td>${item.recHra}</td>
+            <td>${item.recCps}</td>
+            <td>${item.recChs}</td>
+            <td style="font-weight:bold; background:#e0e0e0;">${item.netRecovery}</td>
         `;
         tDuB+=item.duBasic; tDuDp+=item.duDp; tDuGp+=item.duGp; tDuD+=item.duDa; tDuH+=item.duHra; tDuC+=item.duCps; tDuChs+=item.duChs; tDuT+=item.duTotal;
         tDrB+=item.drBasic; tDrDp+=item.drDp; tDrGp+=item.drGp; tDrD+=item.drDa; tDrH+=item.drHra; tDrC+=item.drCps; tDrChs+=item.drChs; tDrT+=item.drTotal;
@@ -346,11 +468,11 @@ function renderRecoveryTable() {
     let gRow = tbody.insertRow(); gRow.className = "recovery-total-row";
     gRow.innerHTML = `
         <td colspan="5"><strong>Grand Total Recovery</strong></td>
-        <td><strong>${tDuB}</strong></td><td><strong>${tDuDp}</strong></td><td><strong>${tDuGp}</strong></td><td><strong>${tDuD}</strong></td><td><strong>${tDuH}</strong></td><td><strong>${tDuC}</strong></td><td><strong>${tDuChs}</strong></td><td style="background:#c8e6c9;"><strong>${tDuT}</strong></td>
-        <td><strong>${tDrB}</strong></td><td><strong>${tDrDp}</strong></td><td><strong>${tDrGp}</strong></td><td><strong>${tDrD}</strong></td><td><strong>${tDrH}</strong></td><td><strong>${tDrC}</strong></td><td><strong>${tDrChs}</strong></td><td style="background:#ffcdd2;"><strong>${tDrT}</strong></td>
-        <td style="color:#b71c1c;"><strong>${tRcB}</strong></td><td style="color:#b71c1c;"><strong>${tRcDp}</strong></td><td style="color:#b71c1c;"><strong>${tRcGp}</strong></td><td style="color:#b71c1c;"><strong>${tRcD}</strong></td><td style="color:#b71c1c;"><strong>${tRcH}</strong></td>
-        <td style="color:green;"><strong>${tRcC}</strong></td><td style="color:green;"><strong>${tRcChs}</strong></td>
-        <td style="font-weight:bold; background:#ef5350; color:white; font-size:12px;">रु. ${tNetRec}/-</td>
+        <td><strong>${tDuB}</strong></td><td><strong>${tDuDp}</strong></td><td><strong>${tDuGp}</strong></td><td><strong>${tDuD}</strong></td><td><strong>${tDuH}</strong></td><td><strong>${tDuC}</strong></td><td><strong>${tDuChs}</strong></td><td style="background:#d6d6d6;"><strong>${tDuT}</strong></td>
+        <td><strong>${tDrB}</strong></td><td><strong>${tDrDp}</strong></td><td><strong>${tDrGp}</strong></td><td><strong>${tDrD}</strong></td><td><strong>${tDrH}</strong></td><td><strong>${tDrC}</strong></td><td><strong>${tDrChs}</strong></td><td style="background:#d6d6d6;"><strong>${tDrT}</strong></td>
+        <td><strong>${tRcB}</strong></td><td><strong>${tRcDp}</strong></td><td><strong>${tRcGp}</strong></td><td><strong>${tRcD}</strong></td><td><strong>${tRcH}</strong></td>
+        <td><strong>${tRcC}</strong></td><td><strong>${tRcChs}</strong></td>
+        <td style="font-weight:bold; background:#000000; color:#ffffff !important; font-size:12px;">रु. ${tNetRec}/-</td>
     `;
 }
 
@@ -363,7 +485,7 @@ function downloadRecoveryExcel() {
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' }); 
     const link = document.createElement("a"); 
     link.setAttribute("href", URL.createObjectURL(blob)); 
-    link.setAttribute("download", "PMC_Multi_Commission_Recovery_Statement.csv"); 
+    link.setAttribute("download", "PMC_Overpayment_Recovery_Monochrome.csv"); 
     link.click();
 }
 
