@@ -2,7 +2,7 @@
 <html lang="mr">
 <head>
 <meta charset="UTF-8">
-<title>पुणे महानगरपालिका - जास्त प्रदान वेतन वसुली विवरणपत्र (Black & White)</title>
+<title>पुणे महानगरपालिका - जास्त प्रदान वेतन वसुली विवरणपत्र</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <style>
 body { 
@@ -228,49 +228,87 @@ window.onload = function() {
 
 function parseDMY(str) { if(!str) return null; let parts = str.split("/"); return new Date(parts[2], parts[1] - 1, parts[0]); }
 
+// अधिकृत तक्त्यानुसार अद्ययावत महागाई भत्ता (DA) दर मॅपिंग (१९८६ ते २०२६)
 function getHistoricalDARate(dateObj) {
-    let y = dateObj.getFullYear(); let m = dateObj.getMonth() + 1;
+    let y = dateObj.getFullYear(); 
+    let m = dateObj.getMonth() + 1;
     
-    if (y < 1996) {
-        if (y === 1986) return m >= 7 ? 0.04 : 0.00;
+    // ४ था वेतन आयोग (१९८६ ते १९९९)
+    if (y < 1996 || (y >= 1996 && y <= 1999 && getCommissionName(dateObj) === "४ था")) {
+        if (y === 1986) return m >= 7 ? 0.04 : 0.04;
         if (y === 1987) return m >= 7 ? 0.13 : 0.08;
         if (y === 1988) return m >= 7 ? 0.23 : 0.18;
         if (y === 1989) return m >= 7 ? 0.34 : 0.29;
         if (y === 1990) return m >= 7 ? 0.43 : 0.38;
         if (y === 1991) return m >= 7 ? 0.60 : 0.51;
-        if (y === 1992) return m >= 7 ? 0.83 : 0.71;
+        if (y === 1992) return m >= 7 ? 0.83 : 0.70;
         if (y === 1993) return m >= 7 ? 0.97 : 0.92;
         if (y === 1994) return m >= 7 ? 1.14 : 1.04;
         if (y === 1995) return m >= 7 ? 1.36 : 1.25;
+        if (y === 1996) return m >= 7 ? 1.53 : 1.48;
+        if (y === 1997) return m >= 7 ? 1.82 : 1.70;
+        if (y === 1998) return m >= 7 ? 2.03 : 1.90;
+        if (y >= 1999) return 2.28;
     }
+    
+    // ५ वा वेतन आयोग (१९९६ ते २००९)
     if (y >= 1996 && y <= 2005) {
         if (y === 1996) return m >= 7 ? 0.04 : 0.00;
         if (y === 1997) return m >= 7 ? 0.13 : 0.08;
         if (y === 1998) return m >= 7 ? 0.22 : 0.16;
         if (y === 1999) return m >= 7 ? 0.37 : 0.32;
-        if (y === 2000) return m >= 7 ? 0.41 : 0.38;
-        if (y === 2001) return m >= 7 ? 0.45 : 0.43;
-        if (y === 2002) return m >= 7 ? 0.52 : 0.49;
-        if (y === 2003) return m >= 7 ? 0.59 : 0.55;
-        if (y === 2004) return m >= 7 ? 0.14 : 0.11;
-        if (y === 2005) return m >= 7 ? 0.21 : 0.17;
+        if (y === 2000) return 0.38;
+        if (y === 2001) return m >= 10 ? 0.415 : 0.38;
+        if (y === 2002) {
+            if (m >= 7) return 0.485;
+            if (m >= 4) return 0.4625;
+            return 0.435;
+        }
+        if (y === 2003) return m >= 4 ? 0.55 : 0.5075;
+        if (y === 2004) {
+            if (m <= 5) return 0.55;
+            if (m === 6 || m === 7) return 0.61;
+            return 0.11; // ऑगस्ट २००४ पासून DP ०.५ विलीन झाल्यानंतर ११%
+        }
+        if (y === 2005) {
+            if (m <= 3) return 0.11;
+            if (m >= 4 && m <= 6) return 0.14;
+            if (m >= 7 && m <= 10) return 0.17;
+            return 0.21;
+        }
     }
+    
+    // ६ वा वेतन आयोग (२००६ ते २०१८)
     if (y >= 2006 && y <= 2015) {
         if (y === 2006) return m >= 7 ? 0.02 : 0.00;
         if (y === 2007) return m >= 7 ? 0.09 : 0.06;
         if (y === 2008) return m >= 7 ? 0.16 : 0.12;
         if (y === 2009) return m >= 7 ? 0.27 : 0.22;
-        if (y === 2010) return m >= 7 ? 0.45 : 0.35;
-        if (y === 2011) return m >= 7 ? 0.58 : 0.51;
+        if (y === 2010) {
+            if (m <= 5) return 0.27;
+            if (m >= 6 && m <= 10) return 0.35;
+            return 0.45;
+        }
+        if (y === 2011) {
+            if (m <= 4) return 0.45;
+            if (m >= 5 && m <= 9) return 0.51;
+            return 0.58;
+        }
         if (y === 2012) return m >= 7 ? 0.72 : 0.65;
         if (y === 2013) return m >= 7 ? 0.90 : 0.80;
         if (y === 2014) return m >= 7 ? 1.07 : 1.00;
         if (y === 2015) return m >= 7 ? 1.19 : 1.13;
     }
+    
+    // ७ वा वेतन आयोग (२०१६ ते २०२६)
     if (y >= 2016) {
-        if (y <= 2019) return m >= 7 ? 0.17 : 0.12;
+        if (y === 2016) return m >= 7 ? 0.02 : 0.00;
+        if (y === 2017) return m >= 7 ? 0.05 : 0.04;
+        if (y === 2018) return m >= 7 ? 0.09 : 0.07;
+        if (y === 2019) return m >= 7 ? 0.17 : 0.12;
+        // कोविड-१९ गोठव कालावधी (जानेवारी २०२० ते जून २०२१ पर्यंत १७%)
         if (y === 2020) return 0.17;
-        if (y === 2021) return m >= 7 ? 0.31 : 0.17;
+        if (y === 2021) return m >= 7 ? 0.31 : 0.17; // जुलै २०२१ ते डिसेंबर २०२१ = ३१%
         if (y === 2022) return m >= 7 ? 0.38 : 0.34;
         if (y === 2023) return m >= 7 ? 0.46 : 0.42;
         if (y === 2024) return m >= 7 ? 0.53 : 0.50;
@@ -375,8 +413,9 @@ function computeRowValues(item) {
     let drGp = Math.round(item.drawnGp * ratio);
     let duGp = Math.round(item.dueGp * ratio);
 
+    // ५ व्या वेतन आयोगात ऑगस्ट २००४ पासून ५०% DP (महागाई वेतन)
     let drDp = 0, duDp = 0;
-    if (item.commName === "५ वा" && (item.curYear > 2004 || (item.curYear === 2004 && item.curMonth >= 4))) {
+    if (item.commName === "५ वा" && (item.curYear > 2004 || (item.curYear === 2004 && item.curMonth >= 8))) {
         drDp = Math.round(drBasic * 0.50);
         duDp = Math.round(duBasic * 0.50);
     }
@@ -446,7 +485,7 @@ function renderRecoveryTable() {
             <td><strong>${item.commName}</strong></td>
             <td>${item.actualDays}</td>
             <td><input type="number" class="days-edit-input" min="0" max="${item.actualDays}" value="${item.presentDays}" onchange="onPresentDaysChange(${index}, this.value)"></td>
-            <td>${(item.daRate * 100).toFixed(0)}%</td>
+            <td>${(item.daRate * 100).toFixed(2).replace(/\.00$/, '')}%</td>
             
             <td>${item.duBasic}</td><td>${item.duDp}</td><td>${item.duGp}</td><td>${item.duDa}</td><td>${item.duHra}</td><td>${item.duCps}</td><td>${item.duChs}</td><td style="background:#f0f0f0;">${item.duTotal}</td>
             <td>${item.drBasic}</td><td>${item.drDp}</td><td>${item.drGp}</td><td>${item.drDa}</td><td>${item.drHra}</td><td>${item.drCps}</td><td>${item.drChs}</td><td style="background:#f0f0f0;">${item.drTotal}</td>
@@ -480,12 +519,12 @@ function downloadRecoveryExcel() {
     if (calculatedRecovery.length === 0) return; let csvContent = "\uFEFF";
     csvContent += "Month,Pay Commission,Actual Days,Present Days,D.A. %,Due Basic,Due DP,Due GP,Due DA,Due HRA,Due CPS,Due CHS,Total Due,Drawn Basic,Drawn DP,Drawn GP,Drawn DA,Drawn HRA,Drawn CPS,Drawn CHS,Total Drawn,Basic Diff,DP Diff,GP Diff,DA Diff,HRA Diff,CPS Adj,CHS Adj,Net Recovery\n";
     calculatedRecovery.forEach(item => { 
-        csvContent += [item.month, item.commName, item.actualDays, item.presentDays, (item.daRate*100).toFixed(0)+"%", item.duBasic, item.duDp, item.duGp, item.duDa, item.duHra, item.duCps, item.duChs, item.duTotal, item.drBasic, item.drDp, item.drGp, item.drDa, item.drHra, item.drCps, item.drChs, item.drTotal, item.recBasic, item.recDp, item.recGp, item.recDa, item.recHra, item.recCps, item.recChs, item.netRecovery].join(",") + "\n"; 
+        csvContent += [item.month, item.commName, item.actualDays, item.presentDays, (item.daRate*100).toFixed(2).replace(/\.00$/, '')+"%", item.duBasic, item.duDp, item.duGp, item.duDa, item.duHra, item.duCps, item.duChs, item.duTotal, item.drBasic, item.drDp, item.drGp, item.drDa, item.drHra, item.drCps, item.drChs, item.drTotal, item.recBasic, item.recDp, item.recGp, item.recDa, item.recHra, item.recCps, item.recChs, item.netRecovery].join(",") + "\n"; 
     });
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' }); 
     const link = document.createElement("a"); 
     link.setAttribute("href", URL.createObjectURL(blob)); 
-    link.setAttribute("download", "PMC_Overpayment_Recovery_Monochrome.csv"); 
+    link.setAttribute("download", "PMC_Overpayment_Recovery_Updated.csv"); 
     link.click();
 }
 
