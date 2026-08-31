@@ -216,8 +216,8 @@ tr:nth-child(even) {
 let calculatedRecovery = [];
 const config = { dateFormat: "d/m/Y", allowInput: true };
 
-flatpickr("#rec_start_date", { ...config, defaultDate: "01/04/2002" });
-flatpickr("#rec_end_date", { ...config, defaultDate: "31/08/2021" });
+flatpickr("#rec_start_date", { ...config, defaultDate: "01/01/2016" });
+flatpickr("#rec_end_date", { ...config, defaultDate: "31/08/2026" });
 
 window.onload = function() {
     if(localStorage.getItem("pmc_multi_commission_recovery")) {
@@ -228,7 +228,7 @@ window.onload = function() {
 
 function parseDMY(str) { if(!str) return null; let parts = str.split("/"); return new Date(parts[2], parts[1] - 1, parts[0]); }
 
-// अधिकृत तक्त्यानुसार अद्ययावत महागाई भत्ता (DA) दर मॅपिंग (१९८६ ते २०२६)
+// 🌟 ५ व्या टॅबप्रमाणे ७ व्या वेतनाचा अचूक DA दर मॅपिंग (१९८६ ते २०२६)
 function getHistoricalDARate(dateObj) {
     let y = dateObj.getFullYear(); 
     let m = dateObj.getMonth() + 1;
@@ -300,20 +300,16 @@ function getHistoricalDARate(dateObj) {
         if (y === 2015) return m >= 7 ? 1.19 : 1.13;
     }
     
-    // ७ वा वेतन आयोग (२०१६ ते २०२६)
+    // 🌟 ७ वा वेतन आयोग (५ व्या टॅबमधील मूळ अधिकृत सूत्र)
     if (y >= 2016) {
-        if (y === 2016) return m >= 7 ? 0.02 : 0.00;
-        if (y === 2017) return m >= 7 ? 0.05 : 0.04;
-        if (y === 2018) return m >= 7 ? 0.09 : 0.07;
-        if (y === 2019) return m >= 7 ? 0.17 : 0.12;
-        // कोविड-१९ गोठव कालावधी (जानेवारी २०२० ते जून २०२१ पर्यंत १७%)
+        if (y <= 2019) return 0.12;
         if (y === 2020) return 0.17;
-        if (y === 2021) return m >= 7 ? 0.31 : 0.17; // जुलै २०२१ ते डिसेंबर २०२१ = ३१%
-        if (y === 2022) return m >= 7 ? 0.38 : 0.34;
-        if (y === 2023) return m >= 7 ? 0.46 : 0.42;
-        if (y === 2024) return m >= 7 ? 0.53 : 0.50;
-        if (y === 2025) return m >= 7 ? 0.58 : 0.55;
-        if (y >= 2026) return m >= 1 ? 0.60 : 0.58;
+        if (y === 2021) return (m >= 7) ? 0.31 : 0.17;
+        if (y === 2022) return (m >= 7) ? 0.38 : 0.34;
+        if (y === 2023) return (m >= 7) ? 0.46 : 0.42;
+        if (y === 2024) return (m >= 7) ? 0.50 : 0.50;
+        if (y === 2025) return (m >= 7) ? 0.58 : 0.55;
+        if (y >= 2026) return (m >= 1) ? 0.60 : 0.58;
     }
     return 0.50;
 }
@@ -413,7 +409,6 @@ function computeRowValues(item) {
     let drGp = Math.round(item.drawnGp * ratio);
     let duGp = Math.round(item.dueGp * ratio);
 
-    // ५ व्या वेतन आयोगात ऑगस्ट २००४ पासून ५०% DP (महागाई वेतन)
     let drDp = 0, duDp = 0;
     if (item.commName === "५ वा" && (item.curYear > 2004 || (item.curYear === 2004 && item.curMonth >= 8))) {
         drDp = Math.round(drBasic * 0.50);
