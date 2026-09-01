@@ -173,9 +173,17 @@ tr:nth-child(even) { background-color: #f7f7f7; }
 <label>२००६ पूर्वीचा वेतनवाढ महिना:</label>
 <select id="rec_pre2006_inc_month">
 <option value="1">१ जानेवारी</option>
+<option value="2">१ फेब्रुवारी</option>
+<option value="3">१ मार्च</option>
 <option value="4" selected>१ एप्रिल</option>
+<option value="5">१ मे</option>
+<option value="6">१ जून</option>
 <option value="7">१ जुलै</option>
+<option value="8">१ ऑगस्ट</option>
+<option value="9">१ सप्टेंबर</option>
 <option value="10">१ ऑक्टोबर</option>
+<option value="11">१ नोव्हेंबर</option>
+<option value="12">१ डिसेंबर</option>
 </select>
 </div>
 
@@ -307,8 +315,8 @@ window.onload = function() {
         duSel.appendChild(opt2);
     }
 
-    if(localStorage.getItem("pmc_both_options_recovery_v4")) {
-        calculatedRecovery = JSON.parse(localStorage.getItem("pmc_both_options_recovery_v4"));
+    if(localStorage.getItem("pmc_both_options_recovery_v5")) {
+        calculatedRecovery = JSON.parse(localStorage.getItem("pmc_both_options_recovery_v5"));
         renderRecoveryTable();
     }
 };
@@ -333,7 +341,6 @@ function getScaleIncrementAmount(scaleName, currentBasic, manualInc) {
     return 100;
 }
 
-// 🌟 सुधारित DA दर मॅपिंग (२००० ते २००२ दुरुस्तीसह) 🌟
 function getHistoricalDARate(dateObj) {
     let y = dateObj.getFullYear(); 
     let m = dateObj.getMonth() + 1;
@@ -362,12 +369,9 @@ function getHistoricalDARate(dateObj) {
         if (y === 1997) return m >= 7 ? 0.13 : 0.08;
         if (y === 1998) return m >= 7 ? 0.22 : 0.16;
         if (y === 1999) return m >= 7 ? 0.37 : 0.32;
-        
-        // 🌟 युझरने दिलेल्या दुरुस्तीनुसार २००० ते २००२ चे अचूक दर 🌟
-        if (y === 2000) return m >= 7 ? 0.41 : 0.38; // jan-jun: 38%, jul-dec: 41%
-        if (y === 2001) return m >= 7 ? 0.45 : 0.43; // jan-jun: 43%, jul-dec: 45%
-        if (y === 2002) return m >= 7 ? 0.52 : 0.49; // jan-jun: 49%, jul-dec: 52%
-        
+        if (y === 2000) return m >= 7 ? 0.41 : 0.38;
+        if (y === 2001) return m >= 7 ? 0.45 : 0.43;
+        if (y === 2002) return m >= 7 ? 0.52 : 0.49;
         if (y === 2003) return m >= 4 ? 0.55 : 0.5075;
         if (y === 2004) {
             if (m <= 5) return 0.55;
@@ -481,7 +485,7 @@ function calculateAutomaticMultiCommissionRecovery() {
     if (dEnd < dStart) { alert("वसुली अखेर दिनांक चुकीचा आहे!"); return; }
 
     document.getElementById('recoveryMsg').style.display = "block"; 
-    document.getElementById('recoveryMsg').innerHTML = `<strong>बहु-वेतन आयोग स्वयंचलित वसुली ताळेबंद:</strong> कालावधी: <strong>${startStr} ते ${endStr}</strong> (२००० ते २००२ DA दुरुस्तीसह)`;
+    document.getElementById('recoveryMsg').innerHTML = `<strong>बहु-वेतन आयोग स्वयंचलित वसुली ताळेबंद:</strong> कालावधी: <strong>${startStr} ते ${endStr}</strong>`;
 
     calculatedRecovery = [];
     let currentCursor = new Date(dStart.getFullYear(), dStart.getMonth(), 1);
@@ -529,7 +533,7 @@ function calculateAutomaticMultiCommissionRecovery() {
                 let drIdx = drMatrix.indexOf(activeDrawnBasic);
                 let duIdx = duMatrix.indexOf(activeDueBasic);
                 if (drIdx !== -1 && drIdx < drMatrix.length - 1) activeDrawnBasic = drMatrix[drIdx + 1];
-                if (duIdx !== -1 && duIdx < duMatrix.length - 1) activeDueBasic = duMatrix[duIdx + 1];
+                if (duIdx !== -1 && duIdx < drMatrix.length - 1) activeDueBasic = duMatrix[duIdx + 1];
             } else if (commName === "६ वा") {
                 activeDrawnBasic = Math.round((activeDrawnBasic + activeDrawnGp) * 1.03 / 10) * 10 - activeDrawnGp;
                 activeDueBasic = Math.round((activeDueBasic + activeDueGp) * 1.03 / 10) * 10 - activeDueGp;
@@ -553,7 +557,7 @@ function calculateAutomaticMultiCommissionRecovery() {
                     let drIdx = drMatrix.indexOf(activeDrawnBasic);
                     let duIdx = duMatrix.indexOf(activeDueBasic);
                     if (drIdx !== -1 && drIdx < drMatrix.length - 1) activeDrawnBasic = drMatrix[drIdx + 1];
-                    if (duIdx !== -1 && duIdx < duMatrix.length - 1) activeDueBasic = duMatrix[duIdx + 1];
+                    if (duIdx !== -1 && duIdx < drMatrix.length - 1) activeDueBasic = duMatrix[duIdx + 1];
                 } else if (commName === "६ वा") {
                     activeDrawnBasic = Math.round((activeDrawnBasic + activeDrawnGp) * 1.03 / 10) * 10 - activeDrawnGp;
                     activeDueBasic = Math.round((activeDueBasic + activeDueGp) * 1.03 / 10) * 10 - activeDueGp;
@@ -565,12 +569,12 @@ function calculateAutomaticMultiCommissionRecovery() {
             midIncApplied = true;
         }
 
-        // नियमित वार्षिक वेतनवाढ
+        // नियमित वार्षिक वेतनवाढ (२००६ पूर्वी निवडलेला महिना, २००६ नंतर १ जुलै)
         let isIncrementMonth = false;
         if (curYear < 2006) {
             isIncrementMonth = (curMonth === pre2006IncMonth);
         } else {
-            isIncrementMonth = (curMonth === 7); // ६ वा व ७ वा आयोग = १ जुलै
+            isIncrementMonth = (curMonth === 7);
         }
 
         if (currentCursor.getTime() > dStart.getTime() && isIncrementMonth) {
@@ -580,7 +584,7 @@ function calculateAutomaticMultiCommissionRecovery() {
                 let drIdx = drMatrix.indexOf(activeDrawnBasic);
                 let duIdx = duMatrix.indexOf(activeDueBasic);
                 if (drIdx !== -1 && drIdx < drMatrix.length - 1) activeDrawnBasic = drMatrix[drIdx + 1];
-                if (duIdx !== -1 && duIdx < duMatrix.length - 1) activeDueBasic = duMatrix[duIdx + 1];
+                if (duIdx !== -1 && duIdx < drMatrix.length - 1) activeDueBasic = duMatrix[duIdx + 1];
             } else if (commName === "६ वा") {
                 activeDrawnBasic = Math.round((activeDrawnBasic + activeDrawnGp) * 1.03 / 10) * 10 - activeDrawnGp;
                 activeDueBasic = Math.round((activeDueBasic + activeDueGp) * 1.03 / 10) * 10 - activeDueGp;
@@ -606,7 +610,7 @@ function calculateAutomaticMultiCommissionRecovery() {
         calculatedRecovery.push(rowItem);
         currentCursor.setMonth(currentCursor.getMonth() + 1);
     }
-    localStorage.setItem("pmc_both_options_recovery_v4", JSON.stringify(calculatedRecovery)); 
+    localStorage.setItem("pmc_both_options_recovery_v5", JSON.stringify(calculatedRecovery)); 
     renderRecoveryTable();
 }
 
@@ -668,7 +672,7 @@ function onPresentDaysChange(idx, val) {
     
     calculatedRecovery[idx].presentDays = pDays;
     computeRowValues(calculatedRecovery[idx]);
-    localStorage.setItem("pmc_both_options_recovery_v4", JSON.stringify(calculatedRecovery));
+    localStorage.setItem("pmc_both_options_recovery_v5", JSON.stringify(calculatedRecovery));
     renderRecoveryTable();
 }
 
@@ -728,13 +732,13 @@ function downloadRecoveryExcel() {
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' }); 
     const link = document.createElement("a"); 
     link.setAttribute("href", URL.createObjectURL(blob)); 
-    link.setAttribute("download", "PMC_Recovery_Final_Verified.csv"); 
+    link.setAttribute("download", "PMC_Recovery_All_12_Months.csv"); 
     link.click();
 }
 
 function clearRecoveryStatement() { 
     calculatedRecovery = []; 
-    localStorage.removeItem("pmc_both_options_recovery_v4"); 
+    localStorage.removeItem("pmc_both_options_recovery_v5"); 
     document.getElementById('recoveryMsg').style.display = "none"; 
     renderRecoveryTable(); 
 }
