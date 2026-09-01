@@ -412,46 +412,51 @@ function getHistoricalDARate(dateObj) {
     return 0.50;
 }
 
-// 🌟 दिलेल्या अधिकृत तक्त्यानुसार सुधारित HRA दर मॅपिंग (१९९७ ते २०२६)
+// 🌟 सुधारित HRA दर मॅपिंग (०१/०१/१९९६ ते ३०/०६/१९९७ = ०% सह)
 function getHistoricalHRARate(dateObj) {
     let y = dateObj.getFullYear();
     let m = dateObj.getMonth() + 1;
     
-    // ०१/०८/१९९७ पूर्वी
-    if (y < 1997 || (y === 1997 && m < 8)) {
+    // ४ था वेतन आयोग (१९८६ ते १९९५)
+    if (y < 1996) {
         return 0.15;
     }
     
-    // १. दि. ०१/०८/१९९७ पासून (५ वा आयोग)
-    if (y >= 1997 && y <= 2005) {
+    // ५ वा वेतन आयोग
+    if (y >= 1996 && y <= 2005) {
+        // 🌟 ०१/०१/१९९६ ते ३०/०६/१९९७ (किंवा ०१/०८/१९९७ पूर्वी): घरभाडे भत्ता ०%
+        if (y === 1996 || (y === 1997 && m < 8)) {
+            return 0.00;
+        }
+        // दि. ०१/०८/१९९७ पासून: १५%
         return 0.15;
     }
     
     // ६ वा वेतन आयोग
     if (y >= 2006 && y <= 2015) {
-        // ३. ०१/०१/२००६ ते ३०/०६/२००९ अखेर: घरभाडे देय नाही
+        // ०१/०१/२००६ ते ३०/०६/२००९ अखेर: घरभाडे देय नाही (०%)
         if (y <= 2008 || (y === 2009 && m <= 6)) {
             return 0.00;
         }
-        // २. दि. ०१/०८/२००९ (किंवा जुलै २००९) पासून सुधारित २०%
+        // दि. ०१/०८/२००९ पासून सुधारित २०%
         return 0.20;
     }
     
     // ७ वा वेतन आयोग
     if (y >= 2016) {
-        // ५. ०१/०१/२०१६ ते ३१/१२/२०१८ अखेर: घरभाडे देय नाही
+        // ०१/०१/२०१६ ते ३१/१२/२०१८ अखेर: घरभाडे देय नाही (०%)
         if (y <= 2018) {
             return 0.00;
         }
-        // ८. DA ची मर्यादा ५०% पेक्षा जास्त (जुलै २०२४ पासून)
+        // DA ची मर्यादा ५०% पेक्षा जास्त (जुलै २०२४ पासून)
         if (y > 2024 || (y === 2024 && m >= 7)) {
             return 0.30;
         }
-        // ७. DA ची मर्यादा २५% पेक्षा जास्त (जुलै २०२१ पासून)
+        // DA ची मर्यादा २५% पेक्षा जास्त (जुलै २०२१ पासून)
         if (y > 2021 || (y === 2021 && m >= 7)) {
             return 0.27;
         }
-        // ६. दि. ०१/०१/२०१९ पासून २४%
+        // दि. ०१/०१/२०१९ पासून २४%
         return 0.24;
     }
     
@@ -491,7 +496,7 @@ function calculateAutomaticMultiCommissionRecovery() {
     if (dEnd < dStart) { alert("वसुली अखेर दिनांक चुकीचा आहे!"); return; }
 
     document.getElementById('recoveryMsg').style.display = "block"; 
-    document.getElementById('recoveryMsg').innerHTML = `<strong>बहु-वेतन आयोग स्वयंचलित वसुली ताळेबंद:</strong> कालावधी: <strong>${startStr} ते ${endStr}</strong> (सुधारित HRA नियमांसह)`;
+    document.getElementById('recoveryMsg').innerHTML = `<strong>बहु-वेतन आयोग स्वयंचलित वसुली ताळेबंद:</strong> कालावधी: <strong>${startStr} ते ${endStr}</strong> (०१/०१/१९९६ ते ३०/०६/१९९७ HRA = ०% सह)`;
 
     calculatedRecovery = [];
     let currentCursor = new Date(dStart.getFullYear(), dStart.getMonth(), 1);
@@ -547,7 +552,7 @@ function calculateAutomaticMultiCommissionRecovery() {
                 let drIdx = drMatrix.indexOf(activeDrawnBasic);
                 let duIdx = duMatrix.indexOf(activeDueBasic);
                 if (drIdx !== -1 && drIdx < drMatrix.length - 1) activeDrawnBasic = drMatrix[drIdx + 1];
-                if (duIdx !== -1 && duIdx < duMatrix.length - 1) activeDueBasic = duMatrix[duIdx + 1];
+                if (duIdx !== -1 && duIdx < drMatrix.length - 1) activeDueBasic = duMatrix[duIdx + 1];
             } else if (commName === "६ वा") {
                 activeDrawnBasic = Math.round((activeDrawnBasic + drawnGp) * 1.03 / 10) * 10 - drawnGp;
                 activeDueBasic = Math.round((activeDueBasic + dueGp) * 1.03 / 10) * 10 - dueGp;
@@ -695,7 +700,7 @@ function downloadRecoveryExcel() {
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' }); 
     const link = document.createElement("a"); 
     link.setAttribute("href", URL.createObjectURL(blob)); 
-    link.setAttribute("download", "PMC_Recovery_with_Updated_HRA.csv"); 
+    link.setAttribute("download", "PMC_Recovery_Updated_HRA.csv"); 
     link.click();
 }
 
