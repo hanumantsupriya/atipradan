@@ -2,7 +2,7 @@
 <html lang="mr">
 <head>
 <meta charset="UTF-8">
-<title>पुणे महानगरपालिका - जास्त प्रदान वेतन वसुली विवरणपत्र</title>
+<title>पुणे महानगरपालिका - जास्त प्रदान वेतन वसुली विवरणपत्र (१९८६ ते २०२६)</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <style>
 body { 
@@ -12,7 +12,7 @@ body {
     padding: 15px; 
 }
 .container { 
-    max-width: 1650px; 
+    max-width: 1680px; 
     margin: auto; 
     background: #ffffff; 
     padding: 25px; 
@@ -165,15 +165,15 @@ tr:nth-child(even) {
 <body>
 
 <div class="container">
-<h2>पुणे महानगरपालिका - जास्त प्रदान वेतन वसुली विवरणपत्र</h2>
+<h2>पुणे महानगरपालिका - ४ था ते ७ वा वेतन आयोग जास्त प्रदान वेतन वसुली विवरणपत्र</h2>
 
 <div class="entry-box">
 <div><label>वसुली सुरुवातीचा दिनांक (From):</label><input type="text" id="rec_start_date" placeholder="DD/MM/YYYY"></div>
 <div><label>वसुली अखेरचा दिनांक (To):</label><input type="text" id="rec_end_date" placeholder="DD/MM/YYYY"></div>
-<div><label>सुरुवातीचे चुकीचे मूळ वेतन (Drawn Basic):</label><input type="number" id="rec_drawn_basic" placeholder="उदा. 4000 किंवा 34900"></div>
-<div><label>सुरुवातीचे देय खरे मूळ वेतन (Due Basic):</label><input type="number" id="rec_due_basic" placeholder="उदा. 3800 किंवा 32900"></div>
-<div><label>चुकीचा ग्रेड पे (६ वा आयोग असल्यास):</label><input type="number" id="rec_drawn_gp" value="0"></div>
-<div><label>देय खरा ग्रेड पे (६ वा आयोग असल्यास):</label><input type="number" id="rec_due_gp" value="0"></div>
+<div><label>सुरुवातीचे चुकीचे मूळ वेतन (Drawn Basic - B):</label><input type="number" id="rec_drawn_basic" placeholder="उदा. 950 / 3050 / 34900"></div>
+<div><label>सुरुवातीचे देय खरे मूळ वेतन (Due Basic - B):</label><input type="number" id="rec_due_basic" placeholder="उदा. 900 / 2550 / 32900"></div>
+<div><label>चुकीचा ग्रेड पे (Drawn GP - C):</label><input type="number" id="rec_drawn_gp" value="0"></div>
+<div><label>देय खरा ग्रेड पे (Due GP - C):</label><input type="number" id="rec_due_gp" value="0"></div>
 
 <div style="grid-column: 1 / -1; display: flex; gap: 10px; justify-content: flex-end; margin-top: 10px;">
 <button class="btn-rec-calc" onclick="calculateAutomaticMultiCommissionRecovery()">स्वयंचलित वसुली गणना करा</button>
@@ -189,14 +189,14 @@ tr:nth-child(even) {
 <table id="recoveryStatementTable">
 <thead>
 <tr class="recovery-table-header">
-<th rowspan="2">Month</th><th rowspan="2">Pay Comm.</th><th rowspan="2">Actual Days</th><th rowspan="2">Present Days (Edit)</th><th rowspan="2">D. A. %</th>
+<th rowspan="2">Month</th><th rowspan="2">Pay Comm.</th><th rowspan="2">Actual Days</th><th rowspan="2">Present Days (Edit)</th><th rowspan="2">D. A. % (J)</th>
 <th colspan="8">देय वेतन (DUE)</th>
 <th colspan="8">दिलेले जास्त वेतन (DRAWN)</th>
 <th colspan="8">वसूल करावयाची जादा रक्कम (DIFFERENCE / RECOVERY)</th>
 </tr>
 <tr class="sub-header">
-<th>Basic</th><th>महागाई वेतन (DP)</th><th>Grade Pay</th><th>D. A.</th><th>H.R.A.</th><th>CPS</th><th>CHS</th><th>Total Due</th>
-<th>Basic</th><th>महागाई वेतन (DP)</th><th>Grade Pay</th><th>D. A.</th><th>H.R.A.</th><th>CPS</th><th>CHS</th><th>Total Drawn</th>
+<th>Basic (B)</th><th>महागाई वेतन (DP)</th><th>Grade Pay (C)</th><th>D. A. (L)</th><th>H.R.A. (N)</th><th>CPS</th><th>CHS</th><th>Total Due</th>
+<th>Basic (B)</th><th>महागाई वेतन (DP)</th><th>Grade Pay (C)</th><th>D. A. (L)</th><th>H.R.A. (N)</th><th>CPS</th><th>CHS</th><th>Total Drawn</th>
 <th>Basic Diff</th><th>DP Diff</th><th>GP Diff</th><th>D. A. Diff</th><th>H.R.A. Diff</th><th>CPS Adj(-)</th><th>CHS Adj(-)</th><th>Net Recovery</th>
 </tr>
 </thead>
@@ -207,7 +207,7 @@ tr:nth-child(even) {
 </div>
 
 <div class="footer-msg">
-सदर प्रणाली पुणे महानगरपालिकेच्या ४ था, ५ वा, ६ वा व ७ वा वेतन आयोग नियमांवर आधारित आहे. धन्यवाद!
+सदर प्रणाली पुणे महानगरपालिकेच्या ४ था, ५ वा, ६ वा व ७ वा वेतन आयोग नियमांवर (१९८६ ते २०२६) आधारित आहे. धन्यवाद!
 </div>
 </div>
 
@@ -216,19 +216,19 @@ tr:nth-child(even) {
 let calculatedRecovery = [];
 const config = { dateFormat: "d/m/Y", allowInput: true };
 
-flatpickr("#rec_start_date", { ...config, defaultDate: "01/01/2016" });
-flatpickr("#rec_end_date", { ...config, defaultDate: "31/08/2026" });
+flatpickr("#rec_start_date", { ...config, defaultDate: "01/01/1986" });
+flatpickr("#rec_end_date", { ...config, defaultDate: "31/12/2026" });
 
 window.onload = function() {
-    if(localStorage.getItem("pmc_multi_commission_recovery")) {
-        calculatedRecovery = JSON.parse(localStorage.getItem("pmc_multi_commission_recovery"));
+    if(localStorage.getItem("pmc_full_history_recovery")) {
+        calculatedRecovery = JSON.parse(localStorage.getItem("pmc_full_history_recovery"));
         renderRecoveryTable();
     }
 };
 
 function parseDMY(str) { if(!str) return null; let parts = str.split("/"); return new Date(parts[2], parts[1] - 1, parts[0]); }
 
-// 🌟 ५ व्या टॅबप्रमाणे ७ व्या वेतनाचा अचूक DA दर मॅपिंग (१९८६ ते २०२६)
+// 🌟 जानेवारी १९८६ ते डिसेंबर २०२६ संपूर्ण अधिकृत DA मॅपिंग (J Column)
 function getHistoricalDARate(dateObj) {
     let y = dateObj.getFullYear(); 
     let m = dateObj.getMonth() + 1;
@@ -251,7 +251,7 @@ function getHistoricalDARate(dateObj) {
         if (y >= 1999) return 2.28;
     }
     
-    // ५ वा वेतन आयोग (१९९६ ते २००९)
+    // ५ वा वेतन आयोग (१९९६ ते २००५)
     if (y >= 1996 && y <= 2005) {
         if (y === 1996) return m >= 7 ? 0.04 : 0.00;
         if (y === 1997) return m >= 7 ? 0.13 : 0.08;
@@ -268,7 +268,7 @@ function getHistoricalDARate(dateObj) {
         if (y === 2004) {
             if (m <= 5) return 0.55;
             if (m === 6 || m === 7) return 0.61;
-            return 0.11; // ऑगस्ट २००४ पासून DP ०.५ विलीन झाल्यानंतर ११%
+            return 0.11; // ०१/०८/२००४ पासून Basic + DP वर ११%
         }
         if (y === 2005) {
             if (m <= 3) return 0.11;
@@ -278,7 +278,7 @@ function getHistoricalDARate(dateObj) {
         }
     }
     
-    // ६ वा वेतन आयोग (२००६ ते २०१८)
+    // ६ वा वेतन आयोग (२००६ ते २०१५)
     if (y >= 2006 && y <= 2015) {
         if (y === 2006) return m >= 7 ? 0.02 : 0.00;
         if (y === 2007) return m >= 7 ? 0.09 : 0.06;
@@ -300,7 +300,7 @@ function getHistoricalDARate(dateObj) {
         if (y === 2015) return m >= 7 ? 1.19 : 1.13;
     }
     
-    // 🌟 ७ वा वेतन आयोग (५ व्या टॅबमधील मूळ अधिकृत सूत्र)
+    // ७ वा वेतन आयोग (२०१६ ते २०२६)
     if (y >= 2016) {
         if (y <= 2019) return 0.12;
         if (y === 2020) return 0.17;
@@ -314,12 +314,13 @@ function getHistoricalDARate(dateObj) {
     return 0.50;
 }
 
+// 🌟 HRA दर मॅपिंग (N Column)
 function getHistoricalHRARate(dateObj) {
     let y = dateObj.getFullYear();
-    if (y < 2006) return 0.15;
-    if (y >= 2006 && y <= 2015) return 0.20;
+    if (y < 2006) return 0.15; // ४ था व ५ वा आयोग = १५%
+    if (y >= 2006 && y <= 2015) return 0.20; // ६ वा आयोग = २०%
     if (y >= 2016) {
-        if (getHistoricalDARate(dateObj) >= 0.50) return 0.30;
+        if (getHistoricalDARate(dateObj) >= 0.50) return 0.30; // ५०% DA नंतर ३०% HRA
         if (y >= 2021) return 0.27;
         return 0.24;
     }
@@ -366,6 +367,7 @@ function calculateAutomaticMultiCommissionRecovery() {
         let mLabel = currentCursor.toLocaleString('en-US', { month: 'short', year: '2-digit' }).toUpperCase();
         let commName = getCommissionName(currentCursor);
 
+        // वेतन आयोग बदलताना फिक्सेशन गुणक
         if (commName !== prevComm) {
             if (commName === "६ वा") {
                 activeDrawnBasic = Math.round(activeDrawnBasic * 1.86 / 10) * 10;
@@ -377,6 +379,7 @@ function calculateAutomaticMultiCommissionRecovery() {
             prevComm = commName;
         }
 
+        // वार्षिक वेतनवाढ (दरवर्षी १ जुलै)
         if (currentCursor.getTime() > dStart.getTime() && curMonth === 7) {
             activeDrawnBasic = Math.round(activeDrawnBasic * 1.03 / 10) * 10;
             activeDueBasic = Math.round(activeDueBasic * 1.03 / 10) * 10;
@@ -398,10 +401,11 @@ function calculateAutomaticMultiCommissionRecovery() {
         calculatedRecovery.push(rowItem);
         currentCursor.setMonth(currentCursor.getMonth() + 1);
     }
-    localStorage.setItem("pmc_multi_commission_recovery", JSON.stringify(calculatedRecovery)); 
+    localStorage.setItem("pmc_full_history_recovery", JSON.stringify(calculatedRecovery)); 
     renderRecoveryTable();
 }
 
+// 🌟 सूत्रानुसार प्रत्येक घटकाची अचूक गणना (L & N Column Formulas)
 function computeRowValues(item) {
     let ratio = item.presentDays / item.actualDays;
     let drBasic = Math.round(item.activeDrawnBasic * ratio);
@@ -409,6 +413,7 @@ function computeRowValues(item) {
     let drGp = Math.round(item.drawnGp * ratio);
     let duGp = Math.round(item.dueGp * ratio);
 
+    // ५ व्या वेतन आयोगात ऑगस्ट २००४ पासून ५०% DP (महागाई वेतन)
     let drDp = 0, duDp = 0;
     if (item.commName === "५ वा" && (item.curYear > 2004 || (item.curYear === 2004 && item.curMonth >= 8))) {
         drDp = Math.round(drBasic * 0.50);
@@ -418,11 +423,15 @@ function computeRowValues(item) {
     let drEmol = drBasic + drDp + drGp;
     let duEmol = duBasic + duDp + duGp;
 
+    // L Column Formula: Emoluments * DA Rate
     let drDa = Math.round(drEmol * item.daRate);
     let duDa = Math.round(duEmol * item.daRate);
+
+    // N Column Formula: Emoluments * HRA Rate
     let drHra = Math.round(drEmol * item.hraRate);
     let duHra = Math.round(duEmol * item.hraRate);
 
+    // CPS व CHS कपात
     let drCps = 0, duCps = 0, drChs = 0, duChs = 0;
     if (item.commName === "७ वा") {
         drCps = Math.round((drBasic + drDa) * 0.10);
@@ -459,7 +468,7 @@ function onPresentDaysChange(idx, val) {
     
     calculatedRecovery[idx].presentDays = pDays;
     computeRowValues(calculatedRecovery[idx]);
-    localStorage.setItem("pmc_multi_commission_recovery", JSON.stringify(calculatedRecovery));
+    localStorage.setItem("pmc_full_history_recovery", JSON.stringify(calculatedRecovery));
     renderRecoveryTable();
 }
 
@@ -519,13 +528,13 @@ function downloadRecoveryExcel() {
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' }); 
     const link = document.createElement("a"); 
     link.setAttribute("href", URL.createObjectURL(blob)); 
-    link.setAttribute("download", "PMC_Overpayment_Recovery_Updated.csv"); 
+    link.setAttribute("download", "PMC_Recovery_1986_to_2026.csv"); 
     link.click();
 }
 
 function clearRecoveryStatement() { 
     calculatedRecovery = []; 
-    localStorage.removeItem("pmc_multi_commission_recovery"); 
+    localStorage.removeItem("pmc_full_history_recovery"); 
     document.getElementById('recoveryMsg').style.display = "none"; 
     renderRecoveryTable(); 
 }
