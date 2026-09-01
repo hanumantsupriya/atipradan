@@ -2,7 +2,7 @@
 <html lang="mr">
 <head>
 <meta charset="UTF-8">
-<title>पुणे महानगरपालिका - जास्त प्रदान वेतन वसुली विवरणपत्र (Betterment Increments सह)</title>
+<title>पुणे महानगरपालिका - जास्त प्रदान वेतन वसुली विवरणपत्र</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <style>
 body { 
@@ -12,7 +12,7 @@ body {
     padding: 15px; 
 }
 .container { 
-    max-width: 1700px; 
+    max-width: 1720px; 
     margin: auto; 
     background: #ffffff; 
     padding: 25px; 
@@ -165,13 +165,52 @@ tr:nth-child(even) {
 <body>
 
 <div class="container">
-<h2>पुणे महानगरपालिका - जास्त प्रदान वेतन वसुली विवरणपत्र (Betterment Increments सह)</h2>
+<h2>पुणे महानगरपालिका - जास्त प्रदान वेतन वसुली विवरणपत्र</h2>
 
 <div class="entry-box">
 <div><label>वसुली सुरुवातीचा दिनांक (From):</label><input type="text" id="rec_start_date" placeholder="DD/MM/YYYY"></div>
 <div><label>वसुली अखेरचा दिनांक (To):</label><input type="text" id="rec_end_date" placeholder="DD/MM/YYYY"></div>
 <div><label>सुरुवातीचे चुकीचे मूळ वेतन (Drawn Basic - B):</label><input type="number" id="rec_drawn_basic" placeholder="उदा. 950 / 3050 / 34900"></div>
 <div><label>सुरुवातीचे देय खरे मूळ वेतन (Due Basic - B):</label><input type="number" id="rec_due_basic" placeholder="उदा. 900 / 2550 / 32900"></div>
+
+<div>
+<label>४ था/५ वा आयोग वेतनश्रेणी (Drawn Scale):</label>
+<select id="rec_drawn_scale_slab">
+<option value="AUTO">-- आपोआप स्लॅब निवडा --</option>
+<option value="750-12-870-14-940">750-12-870-14-940 (4था)</option>
+<option value="950-20-1150-25-1500" selected>950-20-1150-25-1500 (4था)</option>
+<option value="1200-30-1560-40-2040">1200-30-1560-40-2040 (4था)</option>
+<option value="1400-40-1800-50-2300">1400-40-1800-50-2300 (4था)</option>
+<option value="2550-55-2660-60-3200">2550-55-2660-60-3200 (5वा)</option>
+<option value="3050-75-3950-80-4590">3050-75-3950-80-4590 (5वा)</option>
+<option value="4000-100-6000">4000-100-6000 (5वा)</option>
+<option value="4500-125-7000">4500-125-7000 (5वा)</option>
+<option value="5000-150-8000">5000-150-8000 (5वा)</option>
+<option value="5500-175-9000">5500-175-9000 (5वा)</option>
+<option value="6500-200-10500">6500-200-10500 (5वा)</option>
+</select>
+</div>
+
+<div>
+<label>४ था/५ वा आयोग वेतनश्रेणी (Due Scale):</label>
+<select id="rec_due_scale_slab">
+<option value="AUTO">-- आपोआप स्लॅब निवडा --</option>
+<option value="750-12-870-14-940">750-12-870-14-940 (4था)</option>
+<option value="950-20-1150-25-1500" selected>950-20-1150-25-1500 (4था)</option>
+<option value="1200-30-1560-40-2040">1200-30-1560-40-2040 (4था)</option>
+<option value="1400-40-1800-50-2300">1400-40-1800-50-2300 (4था)</option>
+<option value="2550-55-2660-60-3200">2550-55-2660-60-3200 (5वा)</option>
+<option value="3050-75-3950-80-4590">3050-75-3950-80-4590 (5वा)</option>
+<option value="4000-100-6000">4000-100-6000 (5वा)</option>
+<option value="4500-125-7000">4500-125-7000 (5वा)</option>
+<option value="5000-150-8000">5000-150-8000 (5वा)</option>
+<option value="5500-175-9000">5500-175-9000 (5वा)</option>
+<option value="6500-200-10500">6500-200-10500 (5वा)</option>
+</select>
+</div>
+
+<div><label>पर्याय २: ४था/५वा ठोक वाढ (Drawn ₹):</label><input type="number" id="rec_manual_inc_drawn" value="0" placeholder="0 = स्लॅब वापरा"></div>
+<div><label>पर्याय २: ४था/५वा ठोक वाढ (Due ₹):</label><input type="number" id="rec_manual_inc_due" value="0" placeholder="0 = स्लॅब वापरा"></div>
 
 <div><label>चुकीचा ग्रेड पे (६ वा आयोग):</label><input type="number" id="rec_drawn_gp" value="0"></div>
 <div><label>देय खरा ग्रेड पे (६ वा आयोग):</label><input type="number" id="rec_due_gp" value="0"></div>
@@ -220,7 +259,6 @@ tr:nth-child(even) {
 
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script>
-// ७ व्या वेतन आयोगाचे S-1 ते S-31 अधिकृत टप्पे
 const payMatrix = {
     "S-1": [15000, 15500, 16000, 16500, 17000, 17500, 18000, 18500, 19100, 19700, 20300, 20900, 21500, 22100, 22800, 23500, 24200, 24900, 25600, 26400, 27200, 28000, 28800, 29700, 30600, 31500, 32400, 33400, 34400, 35400, 36500, 37600, 38700, 39900, 41100, 42300, 43600, 44900, 46200, 47600],
     "S-2": [15300, 15800, 16300, 16800, 17300, 17800, 18300, 18800, 19400, 20000, 20600, 21200, 21800, 22500, 23200, 23900, 24600, 25300, 26100, 26900, 27700, 28500, 29400, 30300, 31200, 32100, 33100, 34100, 35100, 36200, 37300, 38400, 39600, 40800, 42000, 43300, 44600, 45900, 47300, 48700],
@@ -261,13 +299,33 @@ window.onload = function() {
         duSel.appendChild(opt2);
     }
 
-    if(localStorage.getItem("pmc_betterment_recovery")) {
-        calculatedRecovery = JSON.parse(localStorage.getItem("pmc_betterment_recovery"));
+    if(localStorage.getItem("pmc_both_options_recovery")) {
+        calculatedRecovery = JSON.parse(localStorage.getItem("pmc_both_options_recovery"));
         renderRecoveryTable();
     }
 };
 
 function parseDMY(str) { if(!str) return null; let parts = str.split("/"); return new Date(parts[2], parts[1] - 1, parts[0]); }
+
+function getScaleIncrementAmount(scaleName, currentBasic, manualInc) {
+    if (manualInc && manualInc > 0) return manualInc;
+
+    if (scaleName === "750-12-870-14-940") return currentBasic < 870 ? 12 : 14;
+    if (scaleName === "950-20-1150-25-1500") return currentBasic < 1150 ? 20 : 25;
+    if (scaleName === "1200-30-1560-40-2040") return currentBasic < 1560 ? 30 : 40;
+    if (scaleName === "1400-40-1800-50-2300") return currentBasic < 1800 ? 40 : 50;
+    if (scaleName === "2550-55-2660-60-3200") return currentBasic < 2660 ? 55 : 60;
+    if (scaleName === "3050-75-3950-80-4590") return currentBasic < 3950 ? 75 : 80;
+    if (scaleName === "4000-100-6000") return 100;
+    if (scaleName === "4500-125-7000") return 125;
+    if (scaleName === "5000-150-8000") return 150;
+    if (scaleName === "5500-175-9000") return 175;
+    if (scaleName === "6500-200-10500") return 200;
+
+    if (currentBasic < 1500) return 25;
+    if (currentBasic < 4000) return 75;
+    return 100;
+}
 
 function getHistoricalDARate(dateObj) {
     let y = dateObj.getFullYear(); 
@@ -308,7 +366,7 @@ function getHistoricalDARate(dateObj) {
         if (y === 2004) {
             if (m <= 5) return 0.55;
             if (m === 6 || m === 7) return 0.61;
-            return 0.11; // ०१/०८/२००४ पासून DP विलीन झाल्यावर ११%
+            return 0.11;
         }
         if (y === 2005) {
             if (m <= 3) return 0.11;
@@ -340,7 +398,7 @@ function getHistoricalDARate(dateObj) {
         if (y === 2015) return m >= 7 ? 1.19 : 1.13;
     }
     
-    // ७ वा वेतन आयोग (५ व्या टॅबप्रमाणे)
+    // ७ वा वेतन आयोग
     if (y >= 2016) {
         if (y <= 2019) return 0.12;
         if (y === 2020) return 0.17;
@@ -354,16 +412,50 @@ function getHistoricalDARate(dateObj) {
     return 0.50;
 }
 
+// 🌟 दिलेल्या अधिकृत तक्त्यानुसार सुधारित HRA दर मॅपिंग (१९९७ ते २०२६)
 function getHistoricalHRARate(dateObj) {
     let y = dateObj.getFullYear();
-    if (y < 2006) return 0.15;
-    if (y >= 2006 && y <= 2015) return 0.20;
+    let m = dateObj.getMonth() + 1;
+    
+    // ०१/०८/१९९७ पूर्वी
+    if (y < 1997 || (y === 1997 && m < 8)) {
+        return 0.15;
+    }
+    
+    // १. दि. ०१/०८/१९९७ पासून (५ वा आयोग)
+    if (y >= 1997 && y <= 2005) {
+        return 0.15;
+    }
+    
+    // ६ वा वेतन आयोग
+    if (y >= 2006 && y <= 2015) {
+        // ३. ०१/०१/२००६ ते ३०/०६/२००९ अखेर: घरभाडे देय नाही
+        if (y <= 2008 || (y === 2009 && m <= 6)) {
+            return 0.00;
+        }
+        // २. दि. ०१/०८/२००९ (किंवा जुलै २००९) पासून सुधारित २०%
+        return 0.20;
+    }
+    
+    // ७ वा वेतन आयोग
     if (y >= 2016) {
-        if (getHistoricalDARate(dateObj) >= 0.50) return 0.30;
-        if (y >= 2021) return 0.27;
+        // ५. ०१/०१/२०१६ ते ३१/१२/२०१८ अखेर: घरभाडे देय नाही
+        if (y <= 2018) {
+            return 0.00;
+        }
+        // ८. DA ची मर्यादा ५०% पेक्षा जास्त (जुलै २०२४ पासून)
+        if (y > 2024 || (y === 2024 && m >= 7)) {
+            return 0.30;
+        }
+        // ७. DA ची मर्यादा २५% पेक्षा जास्त (जुलै २०२१ पासून)
+        if (y > 2021 || (y === 2021 && m >= 7)) {
+            return 0.27;
+        }
+        // ६. दि. ०१/०१/२०१९ पासून २४%
         return 0.24;
     }
-    return 0.24;
+    
+    return 0.15;
 }
 
 function getCommissionName(dateObj) {
@@ -374,10 +466,14 @@ function getCommissionName(dateObj) {
     return "७ वा";
 }
 
-// 🌟 बेटरमेंट वेतनवाढ (Betterment Increments) सह बहु-आयोग वेतन निश्चिती 🌟
 function calculateAutomaticMultiCommissionRecovery() {
     let drawnBasicStart = parseInt(document.getElementById('rec_drawn_basic').value) || 0;
     let dueBasicStart = parseInt(document.getElementById('rec_due_basic').value) || 0;
+    let drawnScale = document.getElementById('rec_drawn_scale_slab').value;
+    let dueScale = document.getElementById('rec_due_scale_slab').value;
+    let manualIncDrawn = parseInt(document.getElementById('rec_manual_inc_drawn').value) || 0;
+    let manualIncDue = parseInt(document.getElementById('rec_manual_inc_due').value) || 0;
+
     let drawnGp = parseInt(document.getElementById('rec_drawn_gp').value) || 0;
     let dueGp = parseInt(document.getElementById('rec_due_gp').value) || 0;
     let drawnSLevel = document.getElementById('rec_drawn_s_level').value;
@@ -395,7 +491,7 @@ function calculateAutomaticMultiCommissionRecovery() {
     if (dEnd < dStart) { alert("वसुली अखेर दिनांक चुकीचा आहे!"); return; }
 
     document.getElementById('recoveryMsg').style.display = "block"; 
-    document.getElementById('recoveryMsg').innerHTML = `<strong>बहु-वेतन आयोग स्वयंचलित वसुली ताळेबंद:</strong> कालावधी: <strong>${startStr} ते ${endStr}</strong> (६ वा बेटरमेंट: ${bet6th}, ७ वा बेटरमेंट: ${bet7th})`;
+    document.getElementById('recoveryMsg').innerHTML = `<strong>बहु-वेतन आयोग स्वयंचलित वसुली ताळेबंद:</strong> कालावधी: <strong>${startStr} ते ${endStr}</strong> (सुधारित HRA नियमांसह)`;
 
     calculatedRecovery = [];
     let currentCursor = new Date(dStart.getFullYear(), dStart.getMonth(), 1);
@@ -412,10 +508,9 @@ function calculateAutomaticMultiCommissionRecovery() {
         let mLabel = currentCursor.toLocaleString('en-US', { month: 'short', year: '2-digit' }).toUpperCase();
         let commName = getCommissionName(currentCursor);
 
-        // आयोग बदलताना फिक्सेशन व बेटरमेंट जोडणे
+        // वेतन आयोग बदलताना फिक्सेशन व बेटरमेंट
         if (commName !== prevComm) {
             if (commName === "६ वा") {
-                // ६ व्या वेतनात फिटमेंट १.८६ + बेटरमेंट वेतनवाढ (३% प्रति वेतनवाढ)
                 activeDrawnBasic = Math.round(activeDrawnBasic * 1.86 / 10) * 10;
                 activeDueBasic = Math.round(activeDueBasic * 1.86 / 10) * 10;
                 for (let b = 0; b < bet6th; b++) {
@@ -423,7 +518,6 @@ function calculateAutomaticMultiCommissionRecovery() {
                     activeDueBasic = Math.round((activeDueBasic + dueGp) * 1.03 / 10) * 10 - dueGp;
                 }
             } else if (commName === "७ वा") {
-                // ७ व्या वेतनात पे-मॅट्रिक्स लगतचा टप्पा + बेटरमेंट वेतनवाढ
                 let drCalculated = (activeDrawnBasic + drawnGp) * 2.57;
                 let duCalculated = (activeDueBasic + dueGp) * 2.57;
 
@@ -458,8 +552,8 @@ function calculateAutomaticMultiCommissionRecovery() {
                 activeDrawnBasic = Math.round((activeDrawnBasic + drawnGp) * 1.03 / 10) * 10 - drawnGp;
                 activeDueBasic = Math.round((activeDueBasic + dueGp) * 1.03 / 10) * 10 - dueGp;
             } else {
-                activeDrawnBasic = Math.round(activeDrawnBasic * 1.03 / 10) * 10;
-                activeDueBasic = Math.round(activeDueBasic * 1.03 / 10) * 10;
+                activeDrawnBasic += getScaleIncrementAmount(drawnScale, activeDrawnBasic, manualIncDrawn);
+                activeDueBasic += getScaleIncrementAmount(dueScale, activeDueBasic, manualIncDue);
             }
         }
 
@@ -479,7 +573,7 @@ function calculateAutomaticMultiCommissionRecovery() {
         calculatedRecovery.push(rowItem);
         currentCursor.setMonth(currentCursor.getMonth() + 1);
     }
-    localStorage.setItem("pmc_betterment_recovery", JSON.stringify(calculatedRecovery)); 
+    localStorage.setItem("pmc_both_options_recovery", JSON.stringify(calculatedRecovery)); 
     renderRecoveryTable();
 }
 
@@ -541,7 +635,7 @@ function onPresentDaysChange(idx, val) {
     
     calculatedRecovery[idx].presentDays = pDays;
     computeRowValues(calculatedRecovery[idx]);
-    localStorage.setItem("pmc_betterment_recovery", JSON.stringify(calculatedRecovery));
+    localStorage.setItem("pmc_both_options_recovery", JSON.stringify(calculatedRecovery));
     renderRecoveryTable();
 }
 
@@ -601,13 +695,13 @@ function downloadRecoveryExcel() {
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' }); 
     const link = document.createElement("a"); 
     link.setAttribute("href", URL.createObjectURL(blob)); 
-    link.setAttribute("download", "PMC_Recovery_with_Betterment.csv"); 
+    link.setAttribute("download", "PMC_Recovery_with_Updated_HRA.csv"); 
     link.click();
 }
 
 function clearRecoveryStatement() { 
     calculatedRecovery = []; 
-    localStorage.removeItem("pmc_betterment_recovery"); 
+    localStorage.removeItem("pmc_both_options_recovery"); 
     document.getElementById('recoveryMsg').style.display = "none"; 
     renderRecoveryTable(); 
 }
