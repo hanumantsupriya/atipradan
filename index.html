@@ -2,7 +2,7 @@
 <html lang="mr">
 <head>
 <meta charset="UTF-8">
-<title>पुणे महानगरपालिका - जास्त प्रदान वेतन वसुली विवरणपत्र (१९८६ ते २०२६)</title>
+<title>पुणे महानगरपालिका - जास्त प्रदान वेतन वसुली विवरणपत्र (Betterment Increments सह)</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <style>
 body { 
@@ -12,7 +12,7 @@ body {
     padding: 15px; 
 }
 .container { 
-    max-width: 1680px; 
+    max-width: 1700px; 
     margin: auto; 
     background: #ffffff; 
     padding: 25px; 
@@ -165,15 +165,22 @@ tr:nth-child(even) {
 <body>
 
 <div class="container">
-<h2>पुणे महानगरपालिका - ४ था ते ७ वा वेतन आयोग जास्त प्रदान वेतन वसुली विवरणपत्र</h2>
+<h2>पुणे महानगरपालिका - जास्त प्रदान वेतन वसुली विवरणपत्र (Betterment Increments सह)</h2>
 
 <div class="entry-box">
 <div><label>वसुली सुरुवातीचा दिनांक (From):</label><input type="text" id="rec_start_date" placeholder="DD/MM/YYYY"></div>
 <div><label>वसुली अखेरचा दिनांक (To):</label><input type="text" id="rec_end_date" placeholder="DD/MM/YYYY"></div>
 <div><label>सुरुवातीचे चुकीचे मूळ वेतन (Drawn Basic - B):</label><input type="number" id="rec_drawn_basic" placeholder="उदा. 950 / 3050 / 34900"></div>
 <div><label>सुरुवातीचे देय खरे मूळ वेतन (Due Basic - B):</label><input type="number" id="rec_due_basic" placeholder="उदा. 900 / 2550 / 32900"></div>
-<div><label>चुकीचा ग्रेड पे (Drawn GP - C):</label><input type="number" id="rec_drawn_gp" value="0"></div>
-<div><label>देय खरा ग्रेड पे (Due GP - C):</label><input type="number" id="rec_due_gp" value="0"></div>
+
+<div><label>चुकीचा ग्रेड पे (६ वा आयोग):</label><input type="number" id="rec_drawn_gp" value="0"></div>
+<div><label>देय खरा ग्रेड पे (६ वा आयोग):</label><input type="number" id="rec_due_gp" value="0"></div>
+
+<div><label>७ वा वेतन स्तर (Drawn S-Level):</label><select id="rec_drawn_s_level"></select></div>
+<div><label>७ वा वेतन स्तर (Due S-Level):</label><select id="rec_due_s_level"></select></div>
+
+<div><label>६ व्या आयोगातील बेटरमेंट वेतनवाढी:</label><input type="number" id="rec_betterment_6th" value="0" min="0" max="5"></div>
+<div><label>७ व्या आयोगातील बेटरमेंट वेतनवाढी:</label><input type="number" id="rec_betterment_7th" value="0" min="0" max="5"></div>
 
 <div style="grid-column: 1 / -1; display: flex; gap: 10px; justify-content: flex-end; margin-top: 10px;">
 <button class="btn-rec-calc" onclick="calculateAutomaticMultiCommissionRecovery()">स्वयंचलित वसुली गणना करा</button>
@@ -207,12 +214,35 @@ tr:nth-child(even) {
 </div>
 
 <div class="footer-msg">
-सदर प्रणाली पुणे महानगरपालिकेच्या ४ था, ५ वा, ६ वा व ७ वा वेतन आयोग नियमांवर (१९८६ ते २०२६) आधारित आहे. धन्यवाद!
+सदर प्रणाली पुणे महानगरपालिकेच्या ४ था, ५ वा, ६ वा व ७ वा वेतन आयोग नियमांवर आधारित आहे. धन्यवाद!
 </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script>
+// ७ व्या वेतन आयोगाचे S-1 ते S-31 अधिकृत टप्पे
+const payMatrix = {
+    "S-1": [15000, 15500, 16000, 16500, 17000, 17500, 18000, 18500, 19100, 19700, 20300, 20900, 21500, 22100, 22800, 23500, 24200, 24900, 25600, 26400, 27200, 28000, 28800, 29700, 30600, 31500, 32400, 33400, 34400, 35400, 36500, 37600, 38700, 39900, 41100, 42300, 43600, 44900, 46200, 47600],
+    "S-2": [15300, 15800, 16300, 16800, 17300, 17800, 18300, 18800, 19400, 20000, 20600, 21200, 21800, 22500, 23200, 23900, 24600, 25300, 26100, 26900, 27700, 28500, 29400, 30300, 31200, 32100, 33100, 34100, 35100, 36200, 37300, 38400, 39600, 40800, 42000, 43300, 44600, 45900, 47300, 48700],
+    "S-3": [16600, 17100, 17600, 18100, 18600, 19200, 19800, 20400, 21000, 21600, 22200, 22900, 23600, 24300, 25000, 25800, 26600, 27400, 28200, 29000, 29900, 30800, 31700, 32700, 33700, 34700, 35700, 36800, 37900, 39000, 40200, 41400, 42600, 43900, 45200, 46600, 48000, 49400, 50900, 52400],
+    "S-4": [17100, 17600, 18100, 18600, 19200, 19800, 20400, 21000, 21600, 22200, 22900, 23600, 24300, 25000, 25800, 26600, 27400, 28200, 29000, 29900, 30800, 31700, 32700, 33700, 34700, 35700, 36800, 37900, 39000, 40200, 41400, 42600, 43900, 45200, 46600, 48000, 49400, 50900, 52400, 54000],
+    "S-5": [18000, 18500, 19100, 19700, 20300, 20900, 21500, 22100, 22800, 23500, 24200, 24900, 25600, 26400, 27200, 28000, 28800, 29700, 30600, 31500, 32400, 33400, 34400, 35400, 36500, 37600, 38700, 39900, 41100, 42300, 43600, 44900, 46200, 47600, 49000, 50500, 52000, 53600, 55200, 56900],
+    "S-6": [19900, 20500, 21100, 21700, 22400, 23100, 23800, 24500, 25200, 26000, 26800, 27600, 28400, 29300, 30200, 31100, 32000, 33000, 34000, 35000, 36100, 37200, 38300, 39400, 40600, 41800, 43100, 44400, 45700, 47100, 48500, 50000, 51500, 53000, 54600, 56200, 57900, 59600, 61400, 63200],
+    "S-7": [21700, 22400, 23100, 23800, 24500, 25200, 26000, 26800, 27600, 28400, 29300, 30200, 31100, 32000, 33000, 34000, 35000, 36100, 37200, 38300, 39400, 40600, 41800, 43100, 44400, 45700, 47100, 48500, 50000, 51500, 53000, 54600, 56200, 57900, 59600, 61400, 63200, 65100, 67100, 69100],
+    "S-8": [25500, 26300, 27100, 27900, 28700, 29600, 30500, 31400, 32300, 33300, 34300, 35300, 36400, 37500, 38600, 39800, 41000, 42200, 43500, 44800, 46100, 47500, 48900, 50400, 51900, 53500, 55100, 56800, 58500, 60300, 62100, 64000, 65900, 67900, 69900, 72000, 74200, 76400, 78700, 81100],
+    "S-10": [29200, 30100, 31000, 31900, 32900, 33900, 34900, 35900, 37000, 38100, 39200, 40400, 41600, 42800, 44100, 45400, 46800, 48200, 49600, 51100, 52600, 54200, 55800, 57500, 59200, 61000, 62800, 64700, 66600, 68600, 70700, 72800, 75000, 77300, 79600, 82000, 84500, 87000, 89600, 92300],
+    "S-13": [35400, 36500, 37600, 38700, 39900, 41100, 42300, 43600, 44900, 46200, 47600, 49000, 50500, 52000, 53600, 55200, 56900, 58600, 60400, 62200, 64100, 66000, 68000, 70000, 72100, 74300, 76500, 78800, 81200, 83600, 86100, 88700, 91400, 94100, 96900, 99800, 102800, 105900, 109100, 112400],
+    "S-14": [38600, 39800, 41000, 42200, 43500, 44800, 46100, 47500, 48900, 50400, 51900, 53500, 55100, 56800, 58500, 60300, 62100, 64000, 65900, 67900, 69900, 72000, 74200, 76400, 78700, 81100, 83500, 86000, 88600, 91300, 94000, 96800, 99700, 102700, 105800, 109000, 112300, 115700, 119200, 122800]
+};
+
+for(let i=1; i<=31; i++) {
+    let key = "S-" + i;
+    if(!payMatrix[key]) {
+        payMatrix[key] = [15000 + (i*1000)];
+        for(let j=1; j<40; j++) { payMatrix[key].push(Math.round(payMatrix[key][j-1] * 1.03 / 100) * 100); }
+    }
+}
+
 let calculatedRecovery = [];
 const config = { dateFormat: "d/m/Y", allowInput: true };
 
@@ -220,15 +250,25 @@ flatpickr("#rec_start_date", { ...config, defaultDate: "01/01/1986" });
 flatpickr("#rec_end_date", { ...config, defaultDate: "31/12/2026" });
 
 window.onload = function() {
-    if(localStorage.getItem("pmc_full_history_recovery")) {
-        calculatedRecovery = JSON.parse(localStorage.getItem("pmc_full_history_recovery"));
+    let drSel = document.getElementById('rec_drawn_s_level');
+    let duSel = document.getElementById('rec_due_s_level');
+    for(let i=1; i<=31; i++) {
+        let opt1 = document.createElement('option'); opt1.value = "S-"+i; opt1.innerText = "S-"+i;
+        let opt2 = document.createElement('option'); opt2.value = "S-"+i; opt2.innerText = "S-"+i;
+        if(i===10) opt1.selected = true;
+        if(i===8) opt2.selected = true;
+        drSel.appendChild(opt1);
+        duSel.appendChild(opt2);
+    }
+
+    if(localStorage.getItem("pmc_betterment_recovery")) {
+        calculatedRecovery = JSON.parse(localStorage.getItem("pmc_betterment_recovery"));
         renderRecoveryTable();
     }
 };
 
 function parseDMY(str) { if(!str) return null; let parts = str.split("/"); return new Date(parts[2], parts[1] - 1, parts[0]); }
 
-// 🌟 जानेवारी १९८६ ते डिसेंबर २०२६ संपूर्ण अधिकृत DA मॅपिंग (J Column)
 function getHistoricalDARate(dateObj) {
     let y = dateObj.getFullYear(); 
     let m = dateObj.getMonth() + 1;
@@ -268,7 +308,7 @@ function getHistoricalDARate(dateObj) {
         if (y === 2004) {
             if (m <= 5) return 0.55;
             if (m === 6 || m === 7) return 0.61;
-            return 0.11; // ०१/०८/२००४ पासून Basic + DP वर ११%
+            return 0.11; // ०१/०८/२००४ पासून DP विलीन झाल्यावर ११%
         }
         if (y === 2005) {
             if (m <= 3) return 0.11;
@@ -300,7 +340,7 @@ function getHistoricalDARate(dateObj) {
         if (y === 2015) return m >= 7 ? 1.19 : 1.13;
     }
     
-    // ७ वा वेतन आयोग (२०१६ ते २०२६)
+    // ७ वा वेतन आयोग (५ व्या टॅबप्रमाणे)
     if (y >= 2016) {
         if (y <= 2019) return 0.12;
         if (y === 2020) return 0.17;
@@ -314,13 +354,12 @@ function getHistoricalDARate(dateObj) {
     return 0.50;
 }
 
-// 🌟 HRA दर मॅपिंग (N Column)
 function getHistoricalHRARate(dateObj) {
     let y = dateObj.getFullYear();
-    if (y < 2006) return 0.15; // ४ था व ५ वा आयोग = १५%
-    if (y >= 2006 && y <= 2015) return 0.20; // ६ वा आयोग = २०%
+    if (y < 2006) return 0.15;
+    if (y >= 2006 && y <= 2015) return 0.20;
     if (y >= 2016) {
-        if (getHistoricalDARate(dateObj) >= 0.50) return 0.30; // ५०% DA नंतर ३०% HRA
+        if (getHistoricalDARate(dateObj) >= 0.50) return 0.30;
         if (y >= 2021) return 0.27;
         return 0.24;
     }
@@ -335,11 +374,17 @@ function getCommissionName(dateObj) {
     return "७ वा";
 }
 
+// 🌟 बेटरमेंट वेतनवाढ (Betterment Increments) सह बहु-आयोग वेतन निश्चिती 🌟
 function calculateAutomaticMultiCommissionRecovery() {
     let drawnBasicStart = parseInt(document.getElementById('rec_drawn_basic').value) || 0;
     let dueBasicStart = parseInt(document.getElementById('rec_due_basic').value) || 0;
     let drawnGp = parseInt(document.getElementById('rec_drawn_gp').value) || 0;
     let dueGp = parseInt(document.getElementById('rec_due_gp').value) || 0;
+    let drawnSLevel = document.getElementById('rec_drawn_s_level').value;
+    let dueSLevel = document.getElementById('rec_due_s_level').value;
+    let bet6th = parseInt(document.getElementById('rec_betterment_6th').value) || 0;
+    let bet7th = parseInt(document.getElementById('rec_betterment_7th').value) || 0;
+
     let startStr = document.getElementById('rec_start_date').value;
     let endStr = document.getElementById('rec_end_date').value;
 
@@ -350,7 +395,7 @@ function calculateAutomaticMultiCommissionRecovery() {
     if (dEnd < dStart) { alert("वसुली अखेर दिनांक चुकीचा आहे!"); return; }
 
     document.getElementById('recoveryMsg').style.display = "block"; 
-    document.getElementById('recoveryMsg').innerHTML = `<strong>बहु-वेतन आयोग स्वयंचलित वसुली ताळेबंद:</strong> कालावधी: <strong>${startStr} ते ${endStr}</strong> पर्यंतची गणना तयार केली आहे.`;
+    document.getElementById('recoveryMsg').innerHTML = `<strong>बहु-वेतन आयोग स्वयंचलित वसुली ताळेबंद:</strong> कालावधी: <strong>${startStr} ते ${endStr}</strong> (६ वा बेटरमेंट: ${bet6th}, ७ वा बेटरमेंट: ${bet7th})`;
 
     calculatedRecovery = [];
     let currentCursor = new Date(dStart.getFullYear(), dStart.getMonth(), 1);
@@ -367,22 +412,55 @@ function calculateAutomaticMultiCommissionRecovery() {
         let mLabel = currentCursor.toLocaleString('en-US', { month: 'short', year: '2-digit' }).toUpperCase();
         let commName = getCommissionName(currentCursor);
 
-        // वेतन आयोग बदलताना फिक्सेशन गुणक
+        // आयोग बदलताना फिक्सेशन व बेटरमेंट जोडणे
         if (commName !== prevComm) {
             if (commName === "६ वा") {
+                // ६ व्या वेतनात फिटमेंट १.८६ + बेटरमेंट वेतनवाढ (३% प्रति वेतनवाढ)
                 activeDrawnBasic = Math.round(activeDrawnBasic * 1.86 / 10) * 10;
                 activeDueBasic = Math.round(activeDueBasic * 1.86 / 10) * 10;
+                for (let b = 0; b < bet6th; b++) {
+                    activeDrawnBasic = Math.round((activeDrawnBasic + drawnGp) * 1.03 / 10) * 10 - drawnGp;
+                    activeDueBasic = Math.round((activeDueBasic + dueGp) * 1.03 / 10) * 10 - dueGp;
+                }
             } else if (commName === "७ वा") {
-                activeDrawnBasic = Math.round((activeDrawnBasic + drawnGp) * 2.57 / 100) * 100;
-                activeDueBasic = Math.round((activeDueBasic + dueGp) * 2.57 / 100) * 100;
+                // ७ व्या वेतनात पे-मॅट्रिक्स लगतचा टप्पा + बेटरमेंट वेतनवाढ
+                let drCalculated = (activeDrawnBasic + drawnGp) * 2.57;
+                let duCalculated = (activeDueBasic + dueGp) * 2.57;
+
+                let drMatrix = payMatrix[drawnSLevel] || payMatrix["S-10"];
+                let duMatrix = payMatrix[dueSLevel] || payMatrix["S-8"];
+
+                let drStage = drMatrix.find(amt => amt >= drCalculated) || drMatrix[drMatrix.length - 1];
+                let duStage = duMatrix.find(amt => amt >= duCalculated) || duMatrix[duMatrix.length - 1];
+
+                let drIdx = drMatrix.indexOf(drStage) + bet7th;
+                let duIdx = duMatrix.indexOf(duStage) + bet7th;
+
+                if (drIdx >= drMatrix.length) drIdx = drMatrix.length - 1;
+                if (duIdx >= duMatrix.length) duIdx = duMatrix.length - 1;
+
+                activeDrawnBasic = drMatrix[drIdx];
+                activeDueBasic = duMatrix[duIdx];
             }
             prevComm = commName;
         }
 
-        // वार्षिक वेतनवाढ (दरवर्षी १ जुलै)
+        // वार्षिक वेतनवाढ (१ जुलै)
         if (currentCursor.getTime() > dStart.getTime() && curMonth === 7) {
-            activeDrawnBasic = Math.round(activeDrawnBasic * 1.03 / 10) * 10;
-            activeDueBasic = Math.round(activeDueBasic * 1.03 / 10) * 10;
+            if (commName === "७ वा") {
+                let drMatrix = payMatrix[drawnSLevel] || payMatrix["S-10"];
+                let duMatrix = payMatrix[dueSLevel] || payMatrix["S-8"];
+                let drIdx = drMatrix.indexOf(activeDrawnBasic);
+                let duIdx = duMatrix.indexOf(activeDueBasic);
+                if (drIdx !== -1 && drIdx < drMatrix.length - 1) activeDrawnBasic = drMatrix[drIdx + 1];
+                if (duIdx !== -1 && duIdx < duMatrix.length - 1) activeDueBasic = duMatrix[duIdx + 1];
+            } else if (commName === "६ वा") {
+                activeDrawnBasic = Math.round((activeDrawnBasic + drawnGp) * 1.03 / 10) * 10 - drawnGp;
+                activeDueBasic = Math.round((activeDueBasic + dueGp) * 1.03 / 10) * 10 - dueGp;
+            } else {
+                activeDrawnBasic = Math.round(activeDrawnBasic * 1.03 / 10) * 10;
+                activeDueBasic = Math.round(activeDueBasic * 1.03 / 10) * 10;
+            }
         }
 
         let presentDays = daysInMonth;
@@ -401,11 +479,10 @@ function calculateAutomaticMultiCommissionRecovery() {
         calculatedRecovery.push(rowItem);
         currentCursor.setMonth(currentCursor.getMonth() + 1);
     }
-    localStorage.setItem("pmc_full_history_recovery", JSON.stringify(calculatedRecovery)); 
+    localStorage.setItem("pmc_betterment_recovery", JSON.stringify(calculatedRecovery)); 
     renderRecoveryTable();
 }
 
-// 🌟 सूत्रानुसार प्रत्येक घटकाची अचूक गणना (L & N Column Formulas)
 function computeRowValues(item) {
     let ratio = item.presentDays / item.actualDays;
     let drBasic = Math.round(item.activeDrawnBasic * ratio);
@@ -413,7 +490,6 @@ function computeRowValues(item) {
     let drGp = Math.round(item.drawnGp * ratio);
     let duGp = Math.round(item.dueGp * ratio);
 
-    // ५ व्या वेतन आयोगात ऑगस्ट २००४ पासून ५०% DP (महागाई वेतन)
     let drDp = 0, duDp = 0;
     if (item.commName === "५ वा" && (item.curYear > 2004 || (item.curYear === 2004 && item.curMonth >= 8))) {
         drDp = Math.round(drBasic * 0.50);
@@ -423,15 +499,12 @@ function computeRowValues(item) {
     let drEmol = drBasic + drDp + drGp;
     let duEmol = duBasic + duDp + duGp;
 
-    // L Column Formula: Emoluments * DA Rate
     let drDa = Math.round(drEmol * item.daRate);
     let duDa = Math.round(duEmol * item.daRate);
 
-    // N Column Formula: Emoluments * HRA Rate
     let drHra = Math.round(drEmol * item.hraRate);
     let duHra = Math.round(duEmol * item.hraRate);
 
-    // CPS व CHS कपात
     let drCps = 0, duCps = 0, drChs = 0, duChs = 0;
     if (item.commName === "७ वा") {
         drCps = Math.round((drBasic + drDa) * 0.10);
@@ -468,7 +541,7 @@ function onPresentDaysChange(idx, val) {
     
     calculatedRecovery[idx].presentDays = pDays;
     computeRowValues(calculatedRecovery[idx]);
-    localStorage.setItem("pmc_full_history_recovery", JSON.stringify(calculatedRecovery));
+    localStorage.setItem("pmc_betterment_recovery", JSON.stringify(calculatedRecovery));
     renderRecoveryTable();
 }
 
@@ -528,13 +601,13 @@ function downloadRecoveryExcel() {
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' }); 
     const link = document.createElement("a"); 
     link.setAttribute("href", URL.createObjectURL(blob)); 
-    link.setAttribute("download", "PMC_Recovery_1986_to_2026.csv"); 
+    link.setAttribute("download", "PMC_Recovery_with_Betterment.csv"); 
     link.click();
 }
 
 function clearRecoveryStatement() { 
     calculatedRecovery = []; 
-    localStorage.removeItem("pmc_full_history_recovery"); 
+    localStorage.removeItem("pmc_betterment_recovery"); 
     document.getElementById('recoveryMsg').style.display = "none"; 
     renderRecoveryTable(); 
 }
