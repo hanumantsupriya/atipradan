@@ -8,16 +8,16 @@
 body { 
     font-family: 'Segoe UI', Arial, sans-serif; 
     background-color: #f0f0f0; 
-    color: #000000;
+    color: #000000; 
     padding: 15px; 
 }
 .container { 
-    max-width: 1720px; 
+    max-width: 1750px; 
     margin: auto; 
     background: #ffffff; 
     padding: 25px; 
     border-radius: 4px; 
-    border: 1px solid #000000;
+    border: 1px solid #000000; 
     box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
 }
 h2 { 
@@ -54,12 +54,10 @@ input, select {
     box-sizing: border-box; 
     font-size: 13px; 
     background-color: #ffffff; 
-    color: #000000;
+    color: #000000; 
     height: 38px; 
 }
-input:focus, select:focus {
-    outline: 2px solid #000000;
-}
+input:focus, select:focus { outline: 2px solid #000000; }
 .btn-rec-calc { 
     background-color: #000000; 
     color: #ffffff; 
@@ -101,7 +99,7 @@ table {
     border-collapse: collapse; 
     margin-top: 15px; 
     font-size: 10px; 
-    color: #000000;
+    color: #000000; 
 }
 th, td { 
     border: 1px solid #000000; 
@@ -119,9 +117,7 @@ th, td {
     color: #ffffff !important; 
     font-weight: bold; 
 }
-tr:nth-child(even) { 
-    background-color: #f7f7f7; 
-}
+tr:nth-child(even) { background-color: #f7f7f7; }
 .recovery-total-row td { 
     background-color: #d6d6d6 !important; 
     font-weight: bold; 
@@ -148,7 +144,7 @@ tr:nth-child(even) {
     font-weight: bold !important; 
     border: 1px solid #000000 !important; 
     background: #ffffff !important; 
-    color: #000000 !important;
+    color: #000000 !important; 
 }
 .footer-msg { 
     margin-top: 30px; 
@@ -170,13 +166,22 @@ tr:nth-child(even) {
 <div class="entry-box">
 <div><label>वसुली सुरुवातीचा दिनांक (From):</label><input type="text" id="rec_start_date" placeholder="DD/MM/YYYY"></div>
 <div><label>वसुली अखेरचा दिनांक (To):</label><input type="text" id="rec_end_date" placeholder="DD/MM/YYYY"></div>
-<div><label>सुरुवातीचे चुकीचे मूळ वेतन (Drawn Basic - B):</label><input type="number" id="rec_drawn_basic" placeholder="उदा. 950 / 3050 / 34900"></div>
-<div><label>सुरुवातीचे देय खरे मूळ वेतन (Due Basic - B):</label><input type="number" id="rec_due_basic" placeholder="उदा. 900 / 2550 / 32900"></div>
+<div><label>सुरुवातीचे चुकीचे मूळ वेतन (Drawn Basic):</label><input type="number" id="rec_drawn_basic" placeholder="उदा. 950 / 3050 / 34900"></div>
+<div><label>सुरुवातीचे देय खरे मूळ वेतन (Due Basic):</label><input type="number" id="rec_due_basic" placeholder="उदा. 900 / 2550 / 32900"></div>
 
 <div>
-<label>४ था/५ वा आयोग वेतनश्रेणी (Drawn Scale):</label>
+<label>२००६ पूर्वीचा वेतनवाढ महिना:</label>
+<select id="rec_pre2006_inc_month">
+<option value="1">१ जानेवारी</option>
+<option value="4" selected>१ एप्रिल</option>
+<option value="7">१ जुलै</option>
+<option value="10">१ ऑक्टोबर</option>
+</select>
+</div>
+
+<div>
+<label>४था/५वा आयोग वेतनश्रेणी (Drawn):</label>
 <select id="rec_drawn_scale_slab">
-<option value="AUTO">-- आपोआप स्लॅब निवडा --</option>
 <option value="750-12-870-14-940">750-12-870-14-940 (4था)</option>
 <option value="950-20-1150-25-1500" selected>950-20-1150-25-1500 (4था)</option>
 <option value="1200-30-1560-40-2040">1200-30-1560-40-2040 (4था)</option>
@@ -192,9 +197,8 @@ tr:nth-child(even) {
 </div>
 
 <div>
-<label>४ था/५ वा आयोग वेतनश्रेणी (Due Scale):</label>
+<label>४था/५वा आयोग वेतनश्रेणी (Due):</label>
 <select id="rec_due_scale_slab">
-<option value="AUTO">-- आपोआप स्लॅब निवडा --</option>
 <option value="750-12-870-14-940">750-12-870-14-940 (4था)</option>
 <option value="950-20-1150-25-1500" selected>950-20-1150-25-1500 (4था)</option>
 <option value="1200-30-1560-40-2040">1200-30-1560-40-2040 (4था)</option>
@@ -209,17 +213,19 @@ tr:nth-child(even) {
 </select>
 </div>
 
-<div><label>पर्याय २: ४था/५वा ठोक वाढ (Drawn ₹):</label><input type="number" id="rec_manual_inc_drawn" value="0" placeholder="0 = स्लॅब वापरा"></div>
-<div><label>पर्याय २: ४था/५वा ठोक वाढ (Due ₹):</label><input type="number" id="rec_manual_inc_due" value="0" placeholder="0 = स्लॅब वापरा"></div>
+<div><label>४था/५वा ठोक वाढ (Drawn ₹):</label><input type="number" id="rec_manual_inc_drawn" value="0" placeholder="0 = स्लॅब वापरा"></div>
+<div><label>४था/५वा ठोक वाढ (Due ₹):</label><input type="number" id="rec_manual_inc_due" value="0" placeholder="0 = स्लॅब वापरा"></div>
 
 <div><label>चुकीचा ग्रेड पे (६ वा आयोग):</label><input type="number" id="rec_drawn_gp" value="0"></div>
 <div><label>देय खरा ग्रेड पे (६ वा आयोग):</label><input type="number" id="rec_due_gp" value="0"></div>
-
 <div><label>७ वा वेतन स्तर (Drawn S-Level):</label><select id="rec_drawn_s_level"></select></div>
 <div><label>७ वा वेतन स्तर (Due S-Level):</label><select id="rec_due_s_level"></select></div>
 
-<div><label>६ व्या आयोगातील बेटरमेंट वेतनवाढी:</label><input type="number" id="rec_betterment_6th" value="0" min="0" max="5"></div>
-<div><label>७ व्या आयोगातील बेटरमेंट वेतनवाढी:</label><input type="number" id="rec_betterment_7th" value="0" min="0" max="5"></div>
+<div><label>आश्वासित प्रगती योजना (ACPS) दिनांक:</label><input type="text" id="rec_acps_date" placeholder="DD/MM/YYYY (लागू नसल्यास रिक्त)"></div>
+<div><label>ACPS नंतरचा नवीन GP / स्तर (६वा/७वा):</label><input type="number" id="rec_acps_new_gp" value="0" placeholder="उदा. 4200 किंवा 0"></div>
+
+<div><label>मध्यंतरी विशेष वेतनवाढ दिनांक:</label><input type="text" id="rec_mid_inc_date" placeholder="DD/MM/YYYY (लागू नसल्यास रिक्त)"></div>
+<div><label>विशेष वेतनवाढ संख्या:</label><input type="number" id="rec_mid_inc_count" value="0" min="0" max="5"></div>
 
 <div style="grid-column: 1 / -1; display: flex; gap: 10px; justify-content: flex-end; margin-top: 10px;">
 <button class="btn-rec-calc" onclick="calculateAutomaticMultiCommissionRecovery()">स्वयंचलित वसुली गणना करा</button>
@@ -286,6 +292,8 @@ const config = { dateFormat: "d/m/Y", allowInput: true };
 
 flatpickr("#rec_start_date", { ...config, defaultDate: "01/01/1986" });
 flatpickr("#rec_end_date", { ...config, defaultDate: "31/12/2026" });
+flatpickr("#rec_acps_date", { ...config });
+flatpickr("#rec_mid_inc_date", { ...config });
 
 window.onload = function() {
     let drSel = document.getElementById('rec_drawn_s_level');
@@ -299,8 +307,8 @@ window.onload = function() {
         duSel.appendChild(opt2);
     }
 
-    if(localStorage.getItem("pmc_both_options_recovery")) {
-        calculatedRecovery = JSON.parse(localStorage.getItem("pmc_both_options_recovery"));
+    if(localStorage.getItem("pmc_both_options_recovery_v3")) {
+        calculatedRecovery = JSON.parse(localStorage.getItem("pmc_both_options_recovery_v3"));
         renderRecoveryTable();
     }
 };
@@ -309,7 +317,6 @@ function parseDMY(str) { if(!str) return null; let parts = str.split("/"); retur
 
 function getScaleIncrementAmount(scaleName, currentBasic, manualInc) {
     if (manualInc && manualInc > 0) return manualInc;
-
     if (scaleName === "750-12-870-14-940") return currentBasic < 870 ? 12 : 14;
     if (scaleName === "950-20-1150-25-1500") return currentBasic < 1150 ? 20 : 25;
     if (scaleName === "1200-30-1560-40-2040") return currentBasic < 1560 ? 30 : 40;
@@ -321,7 +328,6 @@ function getScaleIncrementAmount(scaleName, currentBasic, manualInc) {
     if (scaleName === "5000-150-8000") return 150;
     if (scaleName === "5500-175-9000") return 175;
     if (scaleName === "6500-200-10500") return 200;
-
     if (currentBasic < 1500) return 25;
     if (currentBasic < 4000) return 75;
     return 100;
@@ -331,7 +337,6 @@ function getHistoricalDARate(dateObj) {
     let y = dateObj.getFullYear(); 
     let m = dateObj.getMonth() + 1;
     
-    // ४ था वेतन आयोग (१९८६ ते १९९९)
     if (y < 1996 || (y >= 1996 && y <= 1999 && getCommissionName(dateObj) === "४ था")) {
         if (y === 1986) return m >= 7 ? 0.04 : 0.04;
         if (y === 1987) return m >= 7 ? 0.13 : 0.08;
@@ -348,8 +353,6 @@ function getHistoricalDARate(dateObj) {
         if (y === 1998) return m >= 7 ? 2.03 : 1.90;
         if (y >= 1999) return 2.28;
     }
-    
-    // ५ वा वेतन आयोग (१९९६ ते २००५)
     if (y >= 1996 && y <= 2005) {
         if (y === 1996) return m >= 7 ? 0.04 : 0.00;
         if (y === 1997) return m >= 7 ? 0.13 : 0.08;
@@ -375,8 +378,6 @@ function getHistoricalDARate(dateObj) {
             return 0.21;
         }
     }
-    
-    // ६ वा वेतन आयोग (२००६ ते २०१५)
     if (y >= 2006 && y <= 2015) {
         if (y === 2006) return m >= 7 ? 0.02 : 0.00;
         if (y === 2007) return m >= 7 ? 0.09 : 0.06;
@@ -397,8 +398,6 @@ function getHistoricalDARate(dateObj) {
         if (y === 2014) return m >= 7 ? 1.07 : 1.00;
         if (y === 2015) return m >= 7 ? 1.19 : 1.13;
     }
-    
-    // ७ वा वेतन आयोग
     if (y >= 2016) {
         if (y <= 2019) return 0.12;
         if (y === 2020) return 0.17;
@@ -412,54 +411,24 @@ function getHistoricalDARate(dateObj) {
     return 0.50;
 }
 
-// 🌟 सुधारित HRA दर मॅपिंग (०१/०१/१९९६ ते ३०/०६/१९९७ = ०% सह)
 function getHistoricalHRARate(dateObj) {
     let y = dateObj.getFullYear();
     let m = dateObj.getMonth() + 1;
-    
-    // ४ था वेतन आयोग (१९८६ ते १९९५)
-    if (y < 1996) {
-        return 0.15;
-    }
-    
-    // ५ वा वेतन आयोग
+    if (y < 1996) return 0.15;
     if (y >= 1996 && y <= 2005) {
-        // 🌟 ०१/०१/१९९६ ते ३०/०६/१९९७ (किंवा ०१/०८/१९९७ पूर्वी): घरभाडे भत्ता ०%
-        if (y === 1996 || (y === 1997 && m < 8)) {
-            return 0.00;
-        }
-        // दि. ०१/०८/१९९७ पासून: १५%
+        if (y === 1996 || (y === 1997 && m < 8)) return 0.00;
         return 0.15;
     }
-    
-    // ६ वा वेतन आयोग
     if (y >= 2006 && y <= 2015) {
-        // ०१/०१/२००६ ते ३०/०६/२००९ अखेर: घरभाडे देय नाही (०%)
-        if (y <= 2008 || (y === 2009 && m <= 6)) {
-            return 0.00;
-        }
-        // दि. ०१/०८/२००९ पासून सुधारित २०%
+        if (y <= 2008 || (y === 2009 && m <= 6)) return 0.00;
         return 0.20;
     }
-    
-    // ७ वा वेतन आयोग
     if (y >= 2016) {
-        // ०१/०१/२०१६ ते ३१/१२/२०१८ अखेर: घरभाडे देय नाही (०%)
-        if (y <= 2018) {
-            return 0.00;
-        }
-        // DA ची मर्यादा ५०% पेक्षा जास्त (जुलै २०२४ पासून)
-        if (y > 2024 || (y === 2024 && m >= 7)) {
-            return 0.30;
-        }
-        // DA ची मर्यादा २५% पेक्षा जास्त (जुलै २०२१ पासून)
-        if (y > 2021 || (y === 2021 && m >= 7)) {
-            return 0.27;
-        }
-        // दि. ०१/०१/२०१९ पासून २४%
+        if (y <= 2018) return 0.00;
+        if (y > 2024 || (y === 2024 && m >= 7)) return 0.30;
+        if (y > 2021 || (y === 2021 && m >= 7)) return 0.27;
         return 0.24;
     }
-    
     return 0.15;
 }
 
@@ -474,6 +443,8 @@ function getCommissionName(dateObj) {
 function calculateAutomaticMultiCommissionRecovery() {
     let drawnBasicStart = parseInt(document.getElementById('rec_drawn_basic').value) || 0;
     let dueBasicStart = parseInt(document.getElementById('rec_due_basic').value) || 0;
+    let pre2006IncMonth = parseInt(document.getElementById('rec_pre2006_inc_month').value) || 4;
+
     let drawnScale = document.getElementById('rec_drawn_scale_slab').value;
     let dueScale = document.getElementById('rec_due_scale_slab').value;
     let manualIncDrawn = parseInt(document.getElementById('rec_manual_inc_drawn').value) || 0;
@@ -483,8 +454,11 @@ function calculateAutomaticMultiCommissionRecovery() {
     let dueGp = parseInt(document.getElementById('rec_due_gp').value) || 0;
     let drawnSLevel = document.getElementById('rec_drawn_s_level').value;
     let dueSLevel = document.getElementById('rec_due_s_level').value;
-    let bet6th = parseInt(document.getElementById('rec_betterment_6th').value) || 0;
-    let bet7th = parseInt(document.getElementById('rec_betterment_7th').value) || 0;
+
+    let acpsDateStr = document.getElementById('rec_acps_date').value;
+    let acpsNewGp = parseInt(document.getElementById('rec_acps_new_gp').value) || 0;
+    let midIncDateStr = document.getElementById('rec_mid_inc_date').value;
+    let midIncCount = parseInt(document.getElementById('rec_mid_inc_count').value) || 0;
 
     let startStr = document.getElementById('rec_start_date').value;
     let endStr = document.getElementById('rec_end_date').value;
@@ -492,11 +466,15 @@ function calculateAutomaticMultiCommissionRecovery() {
     if (!startStr || !endStr || drawnBasicStart <= 0 || dueBasicStart <= 0) {
         alert("कृपया सुरुवातीचा दिनांक, अखेर दिनांक आणि मूळ वेतन अचूक भरा!"); return;
     }
-    let dStart = parseDMY(startStr); let dEnd = parseDMY(endStr);
+    let dStart = parseDMY(startStr); 
+    let dEnd = parseDMY(endStr);
+    let dAcps = parseDMY(acpsDateStr);
+    let dMidInc = parseDMY(midIncDateStr);
+
     if (dEnd < dStart) { alert("वसुली अखेर दिनांक चुकीचा आहे!"); return; }
 
     document.getElementById('recoveryMsg').style.display = "block"; 
-    document.getElementById('recoveryMsg').innerHTML = `<strong>बहु-वेतन आयोग स्वयंचलित वसुली ताळेबंद:</strong> कालावधी: <strong>${startStr} ते ${endStr}</strong> (०१/०१/१९९६ ते ३०/०६/१९९७ HRA = ०% सह)`;
+    document.getElementById('recoveryMsg').innerHTML = `<strong>बहु-वेतन आयोग स्वयंचलित वसुली ताळेबंद:</strong> कालावधी: <strong>${startStr} ते ${endStr}</strong> (ACPS व विशेष वेतनवाढ पर्यायांसह)`;
 
     calculatedRecovery = [];
     let currentCursor = new Date(dStart.getFullYear(), dStart.getMonth(), 1);
@@ -504,7 +482,12 @@ function calculateAutomaticMultiCommissionRecovery() {
 
     let activeDrawnBasic = drawnBasicStart; 
     let activeDueBasic = dueBasicStart;
+    let activeDrawnGp = drawnGp;
+    let activeDueGp = dueGp;
+
     let prevComm = getCommissionName(currentCursor);
+    let acpsApplied = false;
+    let midIncApplied = false;
 
     while (currentCursor <= endCursor) {
         let curYear = currentCursor.getFullYear(); 
@@ -513,49 +496,87 @@ function calculateAutomaticMultiCommissionRecovery() {
         let mLabel = currentCursor.toLocaleString('en-US', { month: 'short', year: '2-digit' }).toUpperCase();
         let commName = getCommissionName(currentCursor);
 
-        // वेतन आयोग बदलताना फिक्सेशन व बेटरमेंट
+        // आयोग बदलताना फिक्सेशन
         if (commName !== prevComm) {
             if (commName === "६ वा") {
                 activeDrawnBasic = Math.round(activeDrawnBasic * 1.86 / 10) * 10;
                 activeDueBasic = Math.round(activeDueBasic * 1.86 / 10) * 10;
-                for (let b = 0; b < bet6th; b++) {
-                    activeDrawnBasic = Math.round((activeDrawnBasic + drawnGp) * 1.03 / 10) * 10 - drawnGp;
-                    activeDueBasic = Math.round((activeDueBasic + dueGp) * 1.03 / 10) * 10 - dueGp;
-                }
             } else if (commName === "७ वा") {
-                let drCalculated = (activeDrawnBasic + drawnGp) * 2.57;
-                let duCalculated = (activeDueBasic + dueGp) * 2.57;
+                let drCalculated = (activeDrawnBasic + activeDrawnGp) * 2.57;
+                let duCalculated = (activeDueBasic + activeDueGp) * 2.57;
 
                 let drMatrix = payMatrix[drawnSLevel] || payMatrix["S-10"];
                 let duMatrix = payMatrix[dueSLevel] || payMatrix["S-8"];
 
-                let drStage = drMatrix.find(amt => amt >= drCalculated) || drMatrix[drMatrix.length - 1];
-                let duStage = duMatrix.find(amt => amt >= duCalculated) || duMatrix[duMatrix.length - 1];
-
-                let drIdx = drMatrix.indexOf(drStage) + bet7th;
-                let duIdx = duMatrix.indexOf(duStage) + bet7th;
-
-                if (drIdx >= drMatrix.length) drIdx = drMatrix.length - 1;
-                if (duIdx >= duMatrix.length) duIdx = duMatrix.length - 1;
-
-                activeDrawnBasic = drMatrix[drIdx];
-                activeDueBasic = duMatrix[duIdx];
+                activeDrawnBasic = drMatrix.find(amt => amt >= drCalculated) || drMatrix[drMatrix.length - 1];
+                activeDueBasic = duMatrix.find(amt => amt >= duCalculated) || duMatrix[duMatrix.length - 1];
             }
             prevComm = commName;
         }
 
-        // वार्षिक वेतनवाढ (१ जुलै)
-        if (currentCursor.getTime() > dStart.getTime() && curMonth === 7) {
+        // 🌟 आश्वासित प्रगती योजना (ACPS / MACPS) वेतनवाढ
+        if (dAcps && !acpsApplied && curYear === dAcps.getFullYear() && curMonth === (dAcps.getMonth() + 1)) {
             if (commName === "७ वा") {
                 let drMatrix = payMatrix[drawnSLevel] || payMatrix["S-10"];
                 let duMatrix = payMatrix[dueSLevel] || payMatrix["S-8"];
                 let drIdx = drMatrix.indexOf(activeDrawnBasic);
                 let duIdx = duMatrix.indexOf(activeDueBasic);
                 if (drIdx !== -1 && drIdx < drMatrix.length - 1) activeDrawnBasic = drMatrix[drIdx + 1];
-                if (duIdx !== -1 && duIdx < drMatrix.length - 1) activeDueBasic = duMatrix[duIdx + 1];
+                if (duIdx !== -1 && duIdx < duMatrix.length - 1) activeDueBasic = duMatrix[duIdx + 1];
             } else if (commName === "६ वा") {
-                activeDrawnBasic = Math.round((activeDrawnBasic + drawnGp) * 1.03 / 10) * 10 - drawnGp;
-                activeDueBasic = Math.round((activeDueBasic + dueGp) * 1.03 / 10) * 10 - dueGp;
+                activeDrawnBasic = Math.round((activeDrawnBasic + activeDrawnGp) * 1.03 / 10) * 10 - activeDrawnGp;
+                activeDueBasic = Math.round((activeDueBasic + activeDueGp) * 1.03 / 10) * 10 - activeDueGp;
+                if (acpsNewGp > 0) {
+                    activeDrawnGp = acpsNewGp;
+                    activeDueGp = acpsNewGp;
+                }
+            } else {
+                activeDrawnBasic += getScaleIncrementAmount(drawnScale, activeDrawnBasic, manualIncDrawn);
+                activeDueBasic += getScaleIncrementAmount(dueScale, activeDueBasic, manualIncDue);
+            }
+            acpsApplied = true;
+        }
+
+        // 🌟 मध्यंतरी विशेष वेतनवाढ (Mid-service Custom Increments)
+        if (dMidInc && !midIncApplied && curYear === dMidInc.getFullYear() && curMonth === (dMidInc.getMonth() + 1)) {
+            for (let k = 0; k < midIncCount; k++) {
+                if (commName === "७ वा") {
+                    let drMatrix = payMatrix[drawnSLevel] || payMatrix["S-10"];
+                    let duMatrix = payMatrix[dueSLevel] || payMatrix["S-8"];
+                    let drIdx = drMatrix.indexOf(activeDrawnBasic);
+                    let duIdx = duMatrix.indexOf(activeDueBasic);
+                    if (drIdx !== -1 && drIdx < drMatrix.length - 1) activeDrawnBasic = drMatrix[drIdx + 1];
+                    if (duIdx !== -1 && duIdx < duMatrix.length - 1) activeDueBasic = duMatrix[duIdx + 1];
+                } else if (commName === "६ वा") {
+                    activeDrawnBasic = Math.round((activeDrawnBasic + activeDrawnGp) * 1.03 / 10) * 10 - activeDrawnGp;
+                    activeDueBasic = Math.round((activeDueBasic + activeDueGp) * 1.03 / 10) * 10 - activeDueGp;
+                } else {
+                    activeDrawnBasic += getScaleIncrementAmount(drawnScale, activeDrawnBasic, manualIncDrawn);
+                    activeDueBasic += getScaleIncrementAmount(dueScale, activeDueBasic, manualIncDue);
+                }
+            }
+            midIncApplied = true;
+        }
+
+        // 🌟 नियमित वार्षिक वेतनवाढ (Annual Increment)
+        let isIncrementMonth = false;
+        if (curYear < 2006) {
+            isIncrementMonth = (curMonth === pre2006IncMonth);
+        } else {
+            isIncrementMonth = (curMonth === 7); // ६ वा व ७ वा आयोग = १ जुलै
+        }
+
+        if (currentCursor.getTime() > dStart.getTime() && isIncrementMonth) {
+            if (commName === "७ वा") {
+                let drMatrix = payMatrix[drawnSLevel] || payMatrix["S-10"];
+                let duMatrix = payMatrix[dueSLevel] || payMatrix["S-8"];
+                let drIdx = drMatrix.indexOf(activeDrawnBasic);
+                let duIdx = duMatrix.indexOf(activeDueBasic);
+                if (drIdx !== -1 && drIdx < drMatrix.length - 1) activeDrawnBasic = drMatrix[drIdx + 1];
+                if (duIdx !== -1 && duIdx < duMatrix.length - 1) activeDueBasic = duMatrix[duIdx + 1];
+            } else if (commName === "६ वा") {
+                activeDrawnBasic = Math.round((activeDrawnBasic + activeDrawnGp) * 1.03 / 10) * 10 - activeDrawnGp;
+                activeDueBasic = Math.round((activeDueBasic + activeDueGp) * 1.03 / 10) * 10 - activeDueGp;
             } else {
                 activeDrawnBasic += getScaleIncrementAmount(drawnScale, activeDrawnBasic, manualIncDrawn);
                 activeDueBasic += getScaleIncrementAmount(dueScale, activeDueBasic, manualIncDue);
@@ -570,7 +591,7 @@ function calculateAutomaticMultiCommissionRecovery() {
             month: mLabel, commName: commName, actualDays: daysInMonth, presentDays: presentDays, 
             daRate: daRate, hraRate: hraRate,
             activeDrawnBasic: activeDrawnBasic, activeDueBasic: activeDueBasic,
-            drawnGp: (commName === "६ वा" ? drawnGp : 0), dueGp: (commName === "६ वा" ? dueGp : 0),
+            drawnGp: (commName === "६ वा" ? activeDrawnGp : 0), dueGp: (commName === "६ वा" ? activeDueGp : 0),
             curYear: curYear, curMonth: curMonth
         };
 
@@ -578,7 +599,7 @@ function calculateAutomaticMultiCommissionRecovery() {
         calculatedRecovery.push(rowItem);
         currentCursor.setMonth(currentCursor.getMonth() + 1);
     }
-    localStorage.setItem("pmc_both_options_recovery", JSON.stringify(calculatedRecovery)); 
+    localStorage.setItem("pmc_both_options_recovery_v3", JSON.stringify(calculatedRecovery)); 
     renderRecoveryTable();
 }
 
@@ -640,7 +661,7 @@ function onPresentDaysChange(idx, val) {
     
     calculatedRecovery[idx].presentDays = pDays;
     computeRowValues(calculatedRecovery[idx]);
-    localStorage.setItem("pmc_both_options_recovery", JSON.stringify(calculatedRecovery));
+    localStorage.setItem("pmc_both_options_recovery_v3", JSON.stringify(calculatedRecovery));
     renderRecoveryTable();
 }
 
@@ -700,13 +721,13 @@ function downloadRecoveryExcel() {
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' }); 
     const link = document.createElement("a"); 
     link.setAttribute("href", URL.createObjectURL(blob)); 
-    link.setAttribute("download", "PMC_Recovery_Updated_HRA.csv"); 
+    link.setAttribute("download", "PMC_Recovery_ACPS_Increments.csv"); 
     link.click();
 }
 
 function clearRecoveryStatement() { 
     calculatedRecovery = []; 
-    localStorage.removeItem("pmc_both_options_recovery"); 
+    localStorage.removeItem("pmc_both_options_recovery_v3"); 
     document.getElementById('recoveryMsg').style.display = "none"; 
     renderRecoveryTable(); 
 }
